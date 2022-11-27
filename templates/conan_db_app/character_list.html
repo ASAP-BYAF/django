@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <h1>真実はいつも一つ</h1>
+    <table>
+        <tr>
+            <th>名前</th>
+            <th>性別</th>
+            <th>年齢</th>
+            <th>誕生日</th>
+            <th>職業</th>
+            <th>登場話</th>
+            <th>詳細</th>
+        </tr>
+    {% for item in object_list %}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.gender}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.birthday|date:"m/d" }}</td>
+            <td>{{item.profession}}</td>
+            <td>
+                {{item.chapter.first.volume.number}} 巻 {{item.chapter.first.number}} 話
+            </td>
+            <td><a href="{% url 'conan_db_app:detail' item.id %}">詳細</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>

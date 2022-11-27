@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'conan_db_app/css/dist/output.css' %}"/>
+    <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body class="min-h-screen flex flex-col [&>main]:flex-1">
+
+        {% block main %}{% endblock %}
+
+        <footer>
+        </footer>
+
+        <nav class="fixed bottom-0">
+            <ul class="flex [&>li]:flex-1 text-center w-screen">
+                <li>list1</li>
+                <li>list2</li>
+                <li>list3</li>
+                <li>list4</li>
+                <li>list5</li>
+            </ul>
+        </nav>
+
+    </body>
+</html>

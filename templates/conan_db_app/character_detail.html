@@ -1,0 +1,59 @@
+{% extends "conan_db_app/base.html" %}
+
+{% block title %}キャラクター詳細{% endblock %}
+
+{% block main %}
+<main>
+    <h1>真実はいつも一つ</h1>
+    <table>
+        <tr>
+            <th>名前</th>
+            <td>{{data.name}}</td>
+        </tr>
+        <tr>
+            <th>性別</th>
+            <td>{{data.gender}}</td>
+        </tr>
+        <tr>
+            <th>年齢</th>
+            <td>{{data.age}}</td>
+        </tr>
+        <tr>
+            <th>誕生日</th>
+            <td>{{data.birthday|date:"m/d" }}</td>
+        </tr>
+        <tr>
+            <th>職業</th>
+            <td>{{data.profession}}</td>
+        </tr>
+        <tr>
+            <th>登場話</th>
+            <td>
+                <ul>
+                    <li class="hidden">{% comment %} ダミー。最初の Volume. を追加するときの頭の閉じタグに対応。 {% endcomment %}
+                        <ul> {% comment %} ダミー。最初の Volume. を追加するときの頭の閉じタグに対応。 {% endcomment %}
+                            {% for item in data2 %}
+                            {% ifchanged  item.volume.number %}
+                                </ul></li><li>{{item.volume.number}} 巻<ul>
+                            {% endifchanged %} 
+                            <li>
+                                {{item.number}} 話 ({{item.name}})
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <div class="flex fixed bottom-[24px]">
+        <div class="w-1/2 bg-amber-300">
+            <h2>補足</h2>
+            <p>{{data.complement}}</p>
+        </div>
+        <div class="w-1/2 bg-amber-200">
+            <h2>補足</h2>
+        </div>
+    </div>
+</main>
+{% endblock %}
