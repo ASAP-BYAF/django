@@ -5,7 +5,7 @@
 {% block main %}
 <main>
     <h1>真実はいつも一つ</h1>
-    <table>
+    <table class="w-[100vw] md:w-[25vw]">
         <tr>
             <th>名前</th>
             <td>{{data.name}}</td>
@@ -26,12 +26,24 @@
             <th>職業</th>
             <td>{{data.profession}}</td>
         </tr>
+    </table>
+    {% comment %} <div class="fixed bottom-[calc(50px-20vh+24px)] h-[20vh] w-[min(100vw,500px)] "> {% endcomment %}
+        {% comment %} <label for="open_close" class="fixed right-1">△</label> {% endcomment %}
+    <input id='open_close' type="checkbox" class="fixed peer"/>
+    <div class="fixed bottom-[50px] h-[20vh] w-[100vw] md:w-[50vw] md:right-[25vw] peer-checked:bottom-[calc(50px-20vh+24px)]">
+        <h2>
+            補足    
+            <label for="open_close">⇅</label>
+        </h2>
+        <article>{{data.complement}}</article>
+    </div>
+    <table class="w-[100vw] md:w-[25vw]">
         <tr>
             <th>登場話</th>
             <td>
                 <ul>
                     <li class="hidden">{% comment %} ダミー。最初の Volume. を追加するときの頭の閉じタグに対応。 {% endcomment %}
-                        <ul> {% comment %} ダミー。最初の Volume. を追加するときの頭の閉じタグに対応。 {% endcomment %}
+                        <ul class="hidden"> {% comment %} ダミー。最初の Volume. を追加するときの頭の閉じタグに対応。 {% endcomment %}
                             {% for item in data2 %}
                             {% ifchanged  item.volume.number %}
                                 </ul></li><li>{{item.volume.number}} 巻<ul>
@@ -45,15 +57,6 @@
                 </ul>
             </td>
         </tr>
-    </table>
-    <div class="flex fixed bottom-[24px]">
-        <div class="w-1/2 bg-amber-300">
-            <h2>補足</h2>
-            <p>{{data.complement}}</p>
-        </div>
-        <div class="w-1/2 bg-amber-200">
-            <h2>補足</h2>
-        </div>
-    </div>
+    </table>    
 </main>
 {% endblock %}
