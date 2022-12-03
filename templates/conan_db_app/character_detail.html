@@ -6,29 +6,31 @@
 {% block main %}
 <main>
     <h1>真実はいつも一つ</h1>
-    <img src="{% static 'conan_db_app/images/conan.jpg' %}" alt="conan" class="w-[30vw] h-auto">
-    <table class="w-[100vw] md:w-[25vw]">
-        <tr>
-            <th>名前</th>
-            <td>{{data.name}}</td>
-        </tr>
-        <tr>
-            <th>性別</th>
-            <td>{{data.gender}}</td>
-        </tr>
-        <tr>
-            <th>年齢</th>
-            <td>{{data.age}}</td>
-        </tr>
-        <tr>
-            <th>誕生日</th>
-            <td>{{data.birthday|date:"m/d" }}</td>
-        </tr>
-        <tr>
-            <th>職業</th>
-            <td>{{data.profession}}</td>
-        </tr>
-    </table>
+    <section class="flex" >
+        <img src="{% static 'conan_db_app/images/conan.jpg' %}" alt="conan" class="w-[30vw] h-auto">
+        <table class="w-[100vw] md:w-[50vw]">
+            <tr>
+                <th>名前</th>
+                <td>{{data.name}}</td>
+            </tr>
+            <tr>
+                <th>性別</th>
+                <td>{{data.gender}}</td>
+            </tr>
+            <tr>
+                <th>年齢</th>
+                <td>{{data.age}}</td>
+            </tr>
+            <tr>
+                <th>誕生日</th>
+                <td>{{data.birthday|date:"m/d" }}</td>
+            </tr>
+            <tr>
+                <th>職業</th>
+                <td>{{data.profession}}</td>
+            </tr>
+        </table>
+    </section>
     {% comment %} <div class="fixed bottom-[calc(50px-20vh+24px)] h-[20vh] w-[min(100vw,500px)] "> {% endcomment %}
         {% comment %} <label for="open_close" class="fixed right-1">△</label> {% endcomment %}
     <input id='open_close' type="checkbox" class="fixed peer"/>
