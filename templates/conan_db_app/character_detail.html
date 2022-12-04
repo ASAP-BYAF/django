@@ -8,28 +8,27 @@
     <h1>真実はいつも一つ</h1>
     <section class="flex justify-around" >
         <img src="{% static 'conan_db_app/images/conan.jpg' %}" alt="conan" class="rounded-full border-solid border-8 border-amber-600 w-[30vw] h-auto">
-        <table class="w-[100vw] md:w-[50vw]">
-            <tr>
-                <th>名前</th>
-                <td>{{data.name}}</td>
-            </tr>
-            <tr>
-                <th>性別</th>
-                <td>{{data.gender}}</td>
-            </tr>
-            <tr>
-                <th>年齢</th>
-                <td>{{data.age}}</td>
-            </tr>
-            <tr>
-                <th>誕生日</th>
-                <td>{{data.birthday|date:"m/d" }}</td>
-            </tr>
-            <tr>
-                <th>職業</th>
-                <td>{{data.profession}}</td>
-            </tr>
-        </table>
+        <div>
+            <strong class="text-7xl">{{data.name}}</strong>
+            <table class="w-[100vw] md:w-[50vw]">
+                <tr>
+                    <th>性別</th>
+                    <td>{{data.gender}}</td>
+                </tr>
+                <tr>
+                    <th>年齢</th>
+                    <td>{{data.age}}</td>
+                </tr>
+                <tr>
+                    <th>誕生日</th>
+                    <td>{{data.birthday|date:"m/d" }}</td>
+                </tr>
+                <tr>
+                    <th>職業</th>
+                    <td>{{data.profession}}</td>
+                </tr>
+            </table>
+        </div>
     </section>
     {% comment %} <div class="fixed bottom-[calc(50px-20vh+24px)] h-[20vh] w-[min(100vw,500px)] "> {% endcomment %}
         {% comment %} <label for="open_close" class="fixed right-1">△</label> {% endcomment %}
