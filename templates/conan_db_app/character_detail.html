@@ -31,16 +31,11 @@
             </table>
         </div>
     </section>
+    <section class="w-[80%] mx-auto my-5">
+        {{data.complement}}
+    </section>
     {% comment %} <div class="fixed bottom-[calc(50px-20vh+24px)] h-[20vh] w-[min(100vw,500px)] "> {% endcomment %}
         {% comment %} <label for="open_close" class="fixed right-1">△</label> {% endcomment %}
-    <input id='open_close' type="checkbox" class="fixed peer"/>
-    <div class="fixed bottom-[50px] h-[20vh] w-[100vw] md:w-[50vw] md:right-[25vw] peer-checked:bottom-[calc(50px-20vh+24px)]">
-        <h2>
-            補足    
-            <label for="open_close">⇅</label>
-        </h2>
-        <article>{{data.complement}}</article>
-    </div>
         <ul>
             <li class="hidden">{% comment %} ダミー。最初の Volume. を追加するときの頭の閉じタグに対応。 {% endcomment %}
                 <ul class="hidden"> {% comment %} ダミー。最初の Volume. を追加するときの頭の閉じタグに対応。 {% endcomment %}
