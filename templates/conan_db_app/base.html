@@ -25,7 +25,9 @@
         <div class="h-[50px]"></div>{% comment %} dummy フッターとフッターナビゲーションがかぶるのを防ぐため。 {% endcomment %}
 
         <nav class="fixed bottom-0">
-            <ul class="flex [&>li]:flex-1 text-center w-screen h-[50px]">
+            <ul class="flex [&>li]:flex-1 text-center w-screen h-[50px]
+                bg-[url('/static/conan_db_app/images/bg_renga.jpg')] bg-[length:100%_1000%]
+                [&>li]:border-2 [&>li]:border-solid [&>li]:border-amber-50 [&>li]:text-white [&>li]:text-2xl">
                 <li>人物</li>
                 <li>事件</li>
                 <li>名言</li>
