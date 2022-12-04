@@ -41,26 +41,19 @@
         </h2>
         <article>{{data.complement}}</article>
     </div>
-    <table class="w-[100vw] md:w-[25vw]">
-        <tr>
-            <th>登場話</th>
-            <td>
-                <ul>
-                    <li class="hidden">{% comment %} ダミー。最初の Volume. を追加するときの頭の閉じタグに対応。 {% endcomment %}
-                        <ul class="hidden"> {% comment %} ダミー。最初の Volume. を追加するときの頭の閉じタグに対応。 {% endcomment %}
-                            {% for item in data2 %}
-                            {% ifchanged  item.volume.number %}
-                                </ul></li><li>{{item.volume.number}} 巻<ul>
-                            {% endifchanged %} 
-                            <li>
-                                {{item.number}} 話 ({{item.name}})
-                            </li>
-                            {% endfor %}
-                        </ul>
+        <ul>
+            <li class="hidden">{% comment %} ダミー。最初の Volume. を追加するときの頭の閉じタグに対応。 {% endcomment %}
+                <ul class="hidden"> {% comment %} ダミー。最初の Volume. を追加するときの頭の閉じタグに対応。 {% endcomment %}
+                    {% for item in data2 %}
+                    {% ifchanged  item.volume.number %}
+                        </ul></li><li>{{item.volume.number}} 巻<ul>
+                    {% endifchanged %} 
+                    <li>
+                        {{item.number}} 話 ({{item.name}})
                     </li>
+                    {% endfor %}
                 </ul>
-            </td>
-        </tr>
-    </table>    
+            </li>
+        </ul>
 </main>
 {% endblock %}
