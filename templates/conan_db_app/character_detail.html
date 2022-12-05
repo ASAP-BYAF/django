@@ -39,16 +39,18 @@
     <section>
     <h1 class="w-[30vw] mx-auto text-2xl">登場話数</h1>
     <hr class="h-2 w-[30vw] mx-auto bg-amber-600 mb-7">
-    <ul class="w-[30vw] ml-[30vw] list-none [&>li]:py-2 [&>li]:border-l-4 [&>li]:border-solid [&>li]:border-gray-300">
+    <ul class="w-[30vw] ml-[30vw] list-none 
+                [&>li]:py-2 [&>li]:border-l-4 [&>li]:border-solid [&>li]:border-gray-300
+                [&>li]:before:content-[''] [&>li]:before:inline-block
+                [&>li]:before:relative [&>li]:before:-left-3 [&>li]:before:top-1 
+                [&>li]:before:w-5 [&>li]:before:h-5">
         {% for item in data2 %}
         {% ifchanged  item.volume.number %}
-        <li class="before:content-[''] before:inline-block before:relative before:-left-3 before:top-1
-                    before:w-5 before:h-5 before:rounded-full before:bg-amber-500">
+        <li class=" before:rounded-full before:bg-amber-500">
         {{item.volume.number}} 巻
         </li>
         {% endifchanged %} 
-        <li class="before:content-[''] before:inline-block before:relative before:-left-3 before:top-1
-                    before:w-5 before:h-5 before:rounded-full before:border-2 before:border-solid before:border-amber-500
+        <li class="before:rounded-full before:border-2 before:border-solid before:border-amber-500
                     before:bg-white">
             {{item.number}} 話 ({{item.name}})
         </li>
