@@ -1,5 +1,4 @@
-\static\conan_db_app\css\dist\output.css
 /static/conan_db_app/css/dist/output.css
 .idea/vcs.xml
-conan_db_app/migrations/__pycache__/0012_alter_character_case_solved_by_event_and_more.cpython-310.pyc
-conan_db_app/__pycache__/models.cpython-310.pyc
+conan_db_app/__pycache__/
+conan_db_app/migrations/__pycache__/
