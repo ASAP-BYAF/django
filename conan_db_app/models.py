@@ -55,6 +55,11 @@ class Event(models.Model):
     ### 他のテーブルとの関連
     chapter = models.ForeignKey(Chapter, on_delete=models.PROTECT, default=1)
 
+    ### object 自体の表示方法を指定
+    def __str__(self):
+        return f'{self.content[0:15]} ...'
+
+
 class Character(models.Model):
     MALE = '男'
     FEMALE = '女'
