@@ -58,7 +58,11 @@
         {% endifchanged %} 
         <li>
         <ul class="flex [&>li]:flex-1">
-            <li></li>
+            <li>
+                {% comment %} {% for data3 in item.event_related_to %} {% endcomment %}
+                    {{data.event_related_to.first.content}}
+                {% comment %} {% endfor %} {% endcomment %}
+            </li>
             <li class="before:rounded-full before:border-2 before:border-solid before:border-amber-500 before:bg-white
                         py-2 border-l-4 border-solid border-gray-300
                         before:content-[''] before:inline-block
