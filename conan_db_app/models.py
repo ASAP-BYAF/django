@@ -49,6 +49,12 @@ class Chapter(models.Model):
     class Meta:
         ordering = ('number',)
 
+class Event(models.Model):
+    content = models.TextField(blank=True, null=True)
+
+    ### 他のテーブルとの関連
+    chapter = models.ForeignKey(Chapter, on_delete=models.PROTECT, default=1)
+
 class Character(models.Model):
     MALE = '男'
     FEMALE = '女'
@@ -72,7 +78,8 @@ class Character(models.Model):
     
     ### 他のテーブルとの関連
     chapter = models.ManyToManyField(Chapter)
-    case_solved_by = models.ManyToManyField(Case, blank=True)
+    case_solved_by = models.ManyToManyField(Case)
+    event_related_to = models.ManyToManyField(Event)
 
     ### object 自体の表示方法を指定
     def __str__(self):
