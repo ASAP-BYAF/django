@@ -16,8 +16,10 @@ def chara_detail_func(request, pk):
 
     character = Character.objects.get(id = pk)
     chapter = character.chapter.all().order_by('volume_id', 'number')
+    event = character.event_related_to.all()
     context ={
         'data' : character, # html 側で for で回すので、イテラブルとして渡す。
         'data2': chapter,
+        'event_list': event,
     }
     return render(request, 'conan_db_app/character_detail.html', context)

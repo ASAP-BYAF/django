@@ -58,10 +58,13 @@
         {% endifchanged %} 
         <li>
         <ul class="flex [&>li]:flex-1">
-            <li>
-                {% comment %} {% for data3 in item.event_related_to %} {% endcomment %}
-                    {{data.event_related_to.first.content}}
-                {% comment %} {% endfor %} {% endcomment %}
+            <li class="p-2">
+                {% for event in event_list %}
+                    {% comment %} {{data.event_related_to.first.content}} {% endcomment %}
+                    {% if event.chapter == item %}
+                        {{event.content}}
+                    {% endif %}
+                {% endfor %}
             </li>
             <li class="before:rounded-full before:border-2 before:border-solid before:border-amber-500 before:bg-white
                         py-2 border-l-4 border-solid border-gray-300
