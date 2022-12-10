@@ -59,15 +59,19 @@
         </li>
 
         {% if chapter_list.has_previous %}
-        <li class="page-item">
-            <a class="page-link" 
-            href="{% url 'conan_db_app:detail' pk=character.id page=1 %}">
-                &laquo; first</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" 
-            href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.previous_page_number %}">
-                &laquo; prev</a>
+        <li>
+            <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
+                <li class="page-item">
+                    <a class="page-link" 
+                    href="{% url 'conan_db_app:detail' pk=character.id page=1 %}">
+                    &laquo; first</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" 
+                    href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.previous_page_number %}">
+                    &laquo; prev</a>
+                </li>
+            </ul>
         </li>
         {% endif %}
 
@@ -107,15 +111,19 @@
         </li>
         {% endfor %}
         {% if chapter_list.has_next %}
-        <li class="page-item">
-            <a class="page-link" 
-            href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.next_page_number %}">
-                next &raquo;</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" 
-            href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.paginator.num_pages %}">
-                last &raquo;</a>
+        <li>
+            <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
+                <li class="page-item">
+                    <a class="page-link" 
+                    href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.next_page_number %}">
+                    next &raquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" 
+                    href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.paginator.num_pages %}">
+                    last &raquo;</a>
+                </li>
+            </ul>
         </li>
         {% endif %}
     </ul>
