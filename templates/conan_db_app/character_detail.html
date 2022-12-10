@@ -4,8 +4,8 @@
 {% block title %}キャラクター詳細{% endblock %}
 
 {% block main %}
-<main class="w-[80vw] mx-auto">
-    <section class=" outline outline-1">
+<main class="w-[80vw] mx-auto border-x-2 border-solid border-black">
+    <section class="border-b-2 border-solid border-black">
         <div class="flex justify-around" >
         {% comment %} 画像ありを試しましたがいまいちでした。<section class="flex justify-around bg-[url('/static/conan_db_app/images/bg_renga.jpg')] bg-[length:50%_50%]" > {% endcomment %}
             <img src="{% static 'conan_db_app/images/conan.jpg' %}" alt="conan" class="rounded-full border-solid border-8 border-amber-600 w-[20vw] h-[20vw] my-auto">
@@ -38,7 +38,7 @@
     </section>
     {% comment %} <div class="fixed bottom-[calc(50px-20vh+24px)] h-[20vh] w-[min(100vw,500px)] "> {% endcomment %}
         {% comment %} <label for="open_close" class="fixed right-1">△</label> {% endcomment %}
-    <section class="w-[30vw] mx-auto outline outline-1">
+    <section class="w-[30vw] mx-auto border-x-2 border-solid border-black">
     <h1 class="py-4 text-2xl text-center">登場話数</h1>
     <hr class="h-2 bg-amber-600 mb-7">
     <ul class="list-none">
