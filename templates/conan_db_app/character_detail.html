@@ -77,10 +77,10 @@
             <ul class="flex [&>li]:flex-1">
                 <li class="p-2"></li>
                 {% comment %} dummy です。話数の li タグと縦の並びをそろえるためにあります。 {% endcomment %}
-                <li class=" py-2 border-l-4 border-solid border-gray-300
+                <li class=" p-2 border-l-4 border-solid border-gray-300
                 before:rounded-full before:bg-amber-500
                 before:content-[''] before:inline-block
-                before:relative before:-left-3 before:top-1 
+                before:relative before:-left-5 before:top-1 
                 before:w-5 before:h-5">
                 {{item.volume.number}} 巻
                 </li>
@@ -96,10 +96,10 @@
                     {% endif %}
                 {% endfor %}
             </li>
-            <li class="py-2 border-l-4 border-solid border-gray-300
+            <li class="p-2 border-l-4 border-solid border-gray-300
                         before:rounded-full before:border-2 before:border-solid before:border-amber-500 before:bg-white
                         before:content-[''] before:inline-block
-                        before:relative before:-left-3 before:top-1 
+                        before:relative before:-left-5 before:top-1 
                         before:w-5 before:h-5">
                         {{item.number}} 話 ({{item.name}})
             </li>
