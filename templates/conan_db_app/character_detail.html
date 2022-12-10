@@ -60,7 +60,6 @@
         <ul class="flex [&>li]:flex-1">
             <li class="p-2">
                 {% for event in event_list %}
-                    {% comment %} {{data.event_related_to.first.content}} {% endcomment %}
                     {% if event.chapter == item %}
                         {{event.content}}
                     {% endif %}
