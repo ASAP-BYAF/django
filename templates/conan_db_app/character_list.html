@@ -28,7 +28,7 @@
             <td>
                 {{item.chapter.first.volume.number}} 巻 {{item.chapter.first.number}} 話
             </td>
-            <td><a href="{% url 'conan_db_app:detail' item.id %}">詳細</a></td>
+            <td><a href="{% url 'conan_db_app:detail' pk=item.id page=1 %}">詳細</a></td>
         </tr>
     {% endfor %}
     </table>
