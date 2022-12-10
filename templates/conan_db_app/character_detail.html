@@ -62,12 +62,16 @@
         <li>
             <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
                 <li class="page-item">
-                    <a class="border-2 border-solid border-gray-300 rounded-2xl px-4" 
+                    <a class="border-2 border-solid border-amber-300 rounded-2xl px-4 bg-amber-200 
+                                transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
+                                duration-500" 
                     href="{% url 'conan_db_app:detail' pk=character.id page=1 %}">
                     &laquo; first</a>
                 </li>
                 <li class="page-item">
-                    <a class="border-2 border-solid border-gray-300 rounded-2xl px-4" 
+                    <a class="border-2 border-solid border-amber-300 rounded-2xl px-4 bg-amber-200 
+                                transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
+                                duration-500" 
                     href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.previous_page_number %}">
                     &laquo; prev</a>
                 </li>
@@ -118,12 +122,16 @@
         <li>
             <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
                 <li class="page-item">
-                    <a class="border-2 border-solid border-gray-300 rounded-2xl px-4" 
+                    <a class="border-2 border-solid border-amber-300 rounded-2xl px-4 bg-amber-200 
+                                transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
+                                duration-500" 
                     href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.next_page_number %}">
                     next &raquo;</a>
                 </li>
                 <li class="page-item">
-                    <a class="border-2 border-solid border-gray-300 rounded-2xl px-4" 
+                    <a class="border-2 border-solid border-amber-300 rounded-2xl px-4 bg-amber-200 
+                                transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
+                                duration-500" 
                     href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.paginator.num_pages %}">
                     last &raquo;</a>
                 </li>
