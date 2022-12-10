@@ -28,10 +28,18 @@
             <ul class="flex [&>li]:flex-1 text-center w-screen h-[50px]
                 bg-[url('/static/conan_db_app/images/bg_renga.jpg')] bg-[length:100%_1000%]
                 [&>li]:border-2 [&>li]:border-solid [&>li]:border-amber-50 [&>li]:text-white [&>li]:text-2xl">
-                <li><a href="{% url 'conan_db_app:list' %}">人物</a></li>
-                <li><a href="{% url 'conan_db_app:case' %}">事件</a></li>
-                <li><a href="{% url 'conan_db_app:wiseword' %}">名言</a></li>
-                <li><a href="{% url 'conan_db_app:others' %}">その他</a></li>
+                <li><a href="{% url 'conan_db_app:list' %}    "
+                        class="block h-[100%] transition-all hover:bg-white hover:text-black hover:font-bold
+                                hover:opacity-30">人物</a></li>
+                <li><a href="{% url 'conan_db_app:case' %}    "
+                        class="block h-[100%] transition-all hover:bg-white hover:text-black hover:font-bold
+                                hover:opacity-30">事件</a></li>
+                <li><a href="{% url 'conan_db_app:wiseword' %}"
+                        class="block h-[100%] transition-all hover:bg-white hover:text-black hover:font-bold
+                                hover:opacity-30">名言</a></li>
+                <li><a href="{% url 'conan_db_app:others' %}  "
+                        class="block h-[100%] transition-all hover:bg-white hover:text-black hover:font-bold
+                                hover:opacity-30">その他</a></li>
             </ul>
         </nav>
 
