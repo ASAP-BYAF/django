@@ -39,7 +39,10 @@
     {% comment %} <div class="fixed bottom-[calc(50px-20vh+24px)] h-[20vh] w-[min(100vw,500px)] "> {% endcomment %}
         {% comment %} <label for="open_close" class="fixed right-1">△</label> {% endcomment %}
     <section class="w-[30vw] mx-auto border-x-2 border-solid border-black">
-    <h1 class="py-4 text-2xl text-center">登場話数</h1>
+    <h1 class="py-4 text-2xl text-center">
+        登場話数
+        ({{chapter_list.number}}/{{chapter_list.paginator.num_pages}} ページ)
+    </h1>
     <hr class="h-2 bg-amber-600 mb-7">
     <ul class="list-none">
         <li>
@@ -54,6 +57,20 @@
                 </li>
             </ul>
         </li>
+
+        {% if chapter_list.has_previous %}
+        <li class="page-item">
+            <a class="page-link" 
+            href="{% url 'conan_db_app:detail' pk=character.id page=1 %}">
+                &laquo; first</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" 
+            href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.previous_page_number %}">
+                &laquo; prev</a>
+        </li>
+        {% endif %}
+
         {% for item in chapter_list %}
         {% ifchanged  item.volume.number %}
         <li>
@@ -89,33 +106,6 @@
         </ul>
         </li>
         {% endfor %}
-    </ul>
-    <ul class="pagination">
-        {% if chapter_list.has_previous %}
-        <li class="page-item">
-            <a class="page-link" 
-            href="{% url 'conan_db_app:detail' pk=character.id page=1 %}">
-                &laquo; first</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" 
-            href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.previous_page_number %}">
-                &laquo; prev</a>
-        </li>
-        {% else %}
-        <li class="page-item">
-            <a class="page-link">
-                &laquo; first</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link">
-                &laquo; prev</a>
-        </li>
-        {% endif %}
-        <li class="page-item">
-            <a class="page-link">
-            {{chapter_list.number}}/{{chapter_list.paginator.num_pages}}</a>
-        </li>
         {% if chapter_list.has_next %}
         <li class="page-item">
             <a class="page-link" 
@@ -125,15 +115,6 @@
         <li class="page-item">
             <a class="page-link" 
             href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.paginator.num_pages %}">
-                last &raquo;</a>
-        </li>
-        {% else %}
-        <li class="page-item">
-            <a class="page-link">
-                next &raquo;</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link">
                 last &raquo;</a>
         </li>
         {% endif %}
