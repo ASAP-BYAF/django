@@ -38,10 +38,22 @@
     </section>
     {% comment %} <div class="fixed bottom-[calc(50px-20vh+24px)] h-[20vh] w-[min(100vw,500px)] "> {% endcomment %}
         {% comment %} <label for="open_close" class="fixed right-1">△</label> {% endcomment %}
-    <section>
-    <h1 class="w-[30vw] mx-auto text-2xl">登場話数</h1>
-    <hr class="h-2 w-[30vw] mx-auto bg-amber-600 mb-7">
-    <ul class="w-[30vw] ml-[25vw] list-none">
+    <section class="w-[30vw] mx-auto outline outline-1">
+    <h1 class="py-4 text-2xl text-center">登場話数</h1>
+    <hr class="h-2 bg-amber-600 mb-7">
+    <ul class="list-none">
+        <li>
+            <ul class="flex [&>li]:flex-1 space-x-2
+                        [&>li]:text-center [&>li]:text-xl [&>li]:
+                        [&>li]:underline [&>li]:underline-offset-8 [&>li]:decoration-amber-500">
+                <li class="p-2">
+                    <p>重要な出来事</p>
+                </li>
+                <li class=" py-2">
+                    <p>事件名</p>
+                </li>
+            </ul>
+        </li>
         {% for item in chapter_list %}
         {% ifchanged  item.volume.number %}
         <li>
