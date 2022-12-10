@@ -5,34 +5,36 @@
 
 {% block main %}
 <main class="w-[80vw] mx-auto">
-    <section class="flex justify-around" >
-    {% comment %} 画像ありを試しましたがいまいちでした。<section class="flex justify-around bg-[url('/static/conan_db_app/images/bg_renga.jpg')] bg-[length:50%_50%]" > {% endcomment %}
-        <img src="{% static 'conan_db_app/images/conan.jpg' %}" alt="conan" class="rounded-full border-solid border-8 border-amber-600 w-[20vw] h-[20vw] my-auto">
-        <div>
-            <p class="font-mono text-6xl text-center mx-auto my-7">{{character.name}}</p>
-            <hr class="h-2 bg-amber-600 mb-7">
-            <table class="w-[100vw] md:w-[25vw] font-mono text-center text-xl mx-auto [&_th]:text-amber-500">
-                <tr>
-                    <th>性別</th>
-                    <td>{{character.gender}}</td>
-                </tr>
-                <tr>
-                    <th>年齢</th>
-                    <td>{{character.age}}</td>
-                </tr>
-                <tr>
-                    <th>誕生日</th>
-                    <td>{{character.birthday|date:"m/d" }}</td>
-                </tr>
-                <tr>
-                    <th>職業</th>
-                    <td>{{character.profession}}</td>
-                </tr>
-            </table>
+    <section class=" outline outline-1">
+        <div class="flex justify-around" >
+        {% comment %} 画像ありを試しましたがいまいちでした。<section class="flex justify-around bg-[url('/static/conan_db_app/images/bg_renga.jpg')] bg-[length:50%_50%]" > {% endcomment %}
+            <img src="{% static 'conan_db_app/images/conan.jpg' %}" alt="conan" class="rounded-full border-solid border-8 border-amber-600 w-[20vw] h-[20vw] my-auto">
+            <div>
+                <p class="font-mono text-6xl text-center mx-auto my-7">{{character.name}}</p>
+                <hr class="h-2 bg-amber-600 mb-7">
+                <table class="w-[100vw] md:w-[25vw] font-mono text-center text-xl mx-auto [&_th]:text-amber-500">
+                    <tr>
+                        <th>性別</th>
+                        <td>{{character.gender}}</td>
+                    </tr>
+                    <tr>
+                        <th>年齢</th>
+                        <td>{{character.age}}</td>
+                    </tr>
+                    <tr>
+                        <th>誕生日</th>
+                        <td>{{character.birthday|date:"m/d" }}</td>
+                    </tr>
+                    <tr>
+                        <th>職業</th>
+                        <td>{{character.profession}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </section>
-    <section class="w-[80%] mx-auto my-5">
-        {{character.complement}}
+        <div class="w-[80%] mx-auto my-4">
+            {{character.complement}}
+        </div>
     </section>
     {% comment %} <div class="fixed bottom-[calc(50px-20vh+24px)] h-[20vh] w-[min(100vw,500px)] "> {% endcomment %}
         {% comment %} <label for="open_close" class="fixed right-1">△</label> {% endcomment %}
