@@ -73,6 +73,10 @@
                 </li>
             </ul>
         </li>
+        {% else %}
+            <p class="border-b-4 border-solid border-gray-300 block 
+            w-[20%] mx-auto py-4
+            text-center text-xl">fisrt</p>
         {% endif %}
 
         {% for item in chapter_list %}
@@ -125,6 +129,10 @@
                 </li>
             </ul>
         </li>
+        {% else %}
+            <p class="border-t-4 border-solid border-gray-300 block 
+            w-[20%] mx-auto py-4
+            text-center text-xl">last</p>
         {% endif %}
     </ul>
     </section>
