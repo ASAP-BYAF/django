@@ -9,5 +9,5 @@ urlpatterns = [
     path('chara_detail/<int:pk>/<int:page>', views.chara_detail_func, name='detail'),
     path('case_list/', views.IndexView.as_view(), name='case'),
     path('wiseword_list/', views.IndexView.as_view(), name='wiseword'),
-    path('others/', views.IndexView.as_view(), name='others'),
+    path('questions/', views.QuestionCreateView.as_view(), name='questions'),
 ]
