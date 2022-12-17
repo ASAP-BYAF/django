@@ -33,7 +33,7 @@ def chara_detail_func(request, pk, page):
 class QuestionCreateView(CreateView):
     form_class = QuestionForm
     template_name = 'conan_db_app/question_form.html'
-    success_url = reverse_lazy('conan_db_app:questions')
+    success_url = reverse_lazy('conan_db_app:question_list')
 
     def form_valid(self, form):
         ''' バリデーションを通った時 '''
@@ -44,3 +44,7 @@ class QuestionCreateView(CreateView):
         ''' バリデーションに失敗した時 '''
         messages.warning(self.request, "保存できませんでした")
         return super().form_invalid(form)
+
+class QuestionListView(ListView):
+    model = Question
+    template_name = 'conan_db_app/question_list.html'
