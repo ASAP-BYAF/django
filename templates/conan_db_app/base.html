@@ -10,6 +10,15 @@
     </head>
     <body class="min-h-screen bg-amber-50 flex flex-col [&>main]:flex-1">
 
+        {% comment %} メッセージがあればこれを出力 {% endcomment %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
         {% block main %}{% endblock %}
 
         <footer class="border-t-2 border-solid border-black">
