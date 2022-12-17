@@ -48,3 +48,4 @@ class QuestionCreateView(CreateView):
 class QuestionListView(ListView):
     model = Question
     template_name = 'conan_db_app/question_list.html'
+    paginate_by = 3

@@ -10,5 +10,5 @@ urlpatterns = [
     path('case_list/', views.IndexView.as_view(), name='case'),
     path('wiseword_list/', views.IndexView.as_view(), name='wiseword'),
     path('question_create/', views.QuestionCreateView.as_view(), name='question_create'),
-    path('question_list/', views.QuestionListView.as_view(), name='question_list'),
+    path('question_list/<int:page>/', views.QuestionListView.as_view(), name='question_list'),
 ]
