@@ -93,3 +93,27 @@ class Character(models.Model):
     ### 並び順を指定
     class Meta:
         ordering = ('id',)
+
+class Question(models.Model):
+    KIND_OF_QUESTION=[
+        ( 'question', '問題'),
+        ( 'questionnaire', 'アンケート'),
+    ]
+
+    NUMBER_OF_ANSWER_OPTION=[
+        (2,'2'),
+        (3,'3'),
+        (4,'4'),
+        (5,'5'),
+    ]
+    
+    kind = models.CharField(max_length=20, blank=False, null=False, choices=KIND_OF_QUESTION)
+    content = models.TextField(blank=False, null=False)
+    n_option = models.IntegerField(blank=False, null=False, choices=NUMBER_OF_ANSWER_OPTION)
+    option1 = models.TextField(blank=False, null=False) 
+    option2 = models.TextField(blank=False, null=False)
+    option3 = models.TextField(blank=True, null=True)
+    option4 = models.TextField(blank=True, null=True)
+    option5 = models.TextField(blank=True, null=True)
+    
+    
