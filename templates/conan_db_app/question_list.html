@@ -5,9 +5,9 @@
 
 {% block main %}
 <main> 
-    <div  class="flex">
+    <div  class="flex-col">
     {% for question in object_list %}
-        <div class="w-[30vw] block m-8 p-8 bg-white border-solid border-2 rounded-md border-gray-300" >
+        <div class="w-[30vw] flex-1 mx-auto block m-8 p-8 bg-white border-solid border-2 rounded-md border-gray-300" >
             <h3>{{question.content}}<h3>
             <ul class="[&>li]:bg-amber-50 [&>li]:my-2 [&>li]:border-solid 
                 [&>li]:border-2 [&>li]:rounded-md [&>li]:border-gray-300 ">
