@@ -100,6 +100,11 @@ class Question(models.Model):
         ( 'questionnaire', 'アンケート'),
     ]
 
+    JENRE_OF_QUESTION=[
+        ( 'conan', '名探偵コナン関係'),
+        ( 'others', 'それ以外'),
+    ]
+
     NUMBER_OF_ANSWER_OPTION=[
         (2,'2'),
         (3,'3'),
@@ -108,6 +113,7 @@ class Question(models.Model):
     ]
     
     kind = models.CharField(max_length=20, blank=False, null=False, choices=KIND_OF_QUESTION)
+    jenre = models.CharField(max_length=20, blank=False, null=False, choices=JENRE_OF_QUESTION) 
     content = models.TextField(blank=False, null=False)
     n_option = models.IntegerField(blank=False, null=False, choices=NUMBER_OF_ANSWER_OPTION)
     option1 = models.TextField(blank=False, null=False) 
