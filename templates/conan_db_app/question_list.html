@@ -27,16 +27,16 @@
     {% endfor %}
 
     {% if page_obj.has_previous %}
-        <a class="text-lg"href="{% url 'conan_db_app:question_list' %}?page=1">
+        <a class="text-lg" href="{% url 'conan_db_app:question_list' %}?page=1">
         &laquo; first</a>
-        <a class="text-lg"href="{% url 'conan_db_app:question_list' %}?page=page_obj.previous_page_number">
+        <a class="text-lg" href="{% url 'conan_db_app:question_list' %}?page={{page_obj.previous_page_number}}">
         &laquo; prev</a>
     {% endif %}
 
     {% if page_obj.has_next %}
-        <a class="text-lg"href="{% url 'conan_db_app:question_list' %}?page=page_obj.next_page_number" >
+        <a class="text-lg" href="{% url 'conan_db_app:question_list' %}?page={{page_obj.next_page_number}}" >
         next &raquo;</a>
-        <a class="text-lg"href="{% url 'conan_db_app:question_list' %}?page=page_obj.paginator.num_pages">
+        <a class="text-lg" href="{% url 'conan_db_app:question_list' %}?page={{page_obj.paginator.num_pages}}">
         last &raquo;</a>
     {% endif %}
 
