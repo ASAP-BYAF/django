@@ -13,3 +13,12 @@ class QuestionForm(forms.ModelForm):
             raise forms.ValidationError(f'{option1_min}文字以上入力してください。')
         
         return option1    
+
+class RefineQuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ['jenre', 'kind']
+        widgets = {
+            'kind': forms.RadioSelect(),
+            'jenre': forms.RadioSelect()
+        }
