@@ -1,30 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-</head>
-<body>
-    <h1>真実はいつも一つ</h1>
- 
+{% extends "conan_db_app/base.html" %}
+{% load static %}
+
+{% block title %}問題・アンケートリスト{% endblock %}
+
+{% block main %}
+<main> 
+    <div  class="flex">
     {% for question in object_list %}
-        <div>
-            {{question.content}}
-            <p>{{ question.option1 }}</p>
-            <p>{{ question.option2 }}</p>
+        <div class="w-[30vw] block m-8 p-8 bg-white border-solid border-2 rounded-md border-gray-300" >
+            <h3>{{question.content}}<h3>
+            <ul class="[&>li]:bg-amber-50 [&>li]:my-2 [&>li]:border-solid 
+                [&>li]:border-2 [&>li]:rounded-md [&>li]:border-gray-300 ">
+            <li>{{ question.option1 }}</li>
+            <li>{{ question.option2 }}</li>
             {% if question.option3 != "" %}
-               <p>{{ question.option3 }}</p>
+               <li>{{ question.option3 }}</li>
             {% endif %}
             {% if question.option4 != "" %}
-               <p>{{ question.option4 }}</p>
+               <li>{{ question.option4 }}</li>
             {% endif %}
             {% if question.option5 != "" %}
-               <p>{{ question.option5 }}</p>
+               <li>{{ question.option5 }}</li>
             {% endif %}
+            </ul>
         </div>
     {% endfor %}
+
+    </div>
 
     {% if page_obj.has_previous %}
         <a class="text-lg" href="{% url 'conan_db_app:question_list' %}?page=1">
@@ -39,6 +41,6 @@
         <a class="text-lg" href="{% url 'conan_db_app:question_list' %}?page={{page_obj.paginator.num_pages}}">
         last &raquo;</a>
     {% endif %}
+</main>
 
-</body>
-</html>
+{% endblock %}
