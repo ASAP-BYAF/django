@@ -15,14 +15,18 @@ class Volume(models.Model):
         ordering = ('number',)
 
 class Case(models.Model):
+    KIND_OF_CASE = [
+        ('黒の組織','黒の組織'),
+        ('恋愛','恋愛'),
+        ('警察関係','警察関係'),
+        ('KID','KID'),
+        ('FBI', 'FBI'),
+        ('赤井家', '赤井家')
+    ]
+
     number = models.IntegerField(primary_key=True)
-    type = models.CharField(max_length=100) # 事件内容：自殺、他殺、誘拐、暗号解読、など
-    cause_of_death = models.CharField(max_length=100, blank=True, null=True)
-    number_of_victim = models.IntegerField(blank=True, null=True)
-    number_of_perpetrator = models.IntegerField(blank=True, null=True)
-    relationship = models.CharField(max_length=100, blank=True, null=True)
-    motivation = models.CharField(max_length=100, blank=True, null=True)
     complement = models.TextField(blank=True, null=True)
+    kind = models.CharField(max_length=30, blank=True, null=True, choices=KIND_OF_CASE)
 
     ### object 自体の表示方法を指定
     def __str__(self):
@@ -50,7 +54,7 @@ class Chapter(models.Model):
         ordering = ('number',)
 
 class Event(models.Model):
-    content = models.TextField(blank=True, null=True)
+    content = models.TextField(null=True)
 
     ### 他のテーブルとの関連
     chapter = models.ForeignKey(Chapter, on_delete=models.PROTECT, default=1)
@@ -61,20 +65,30 @@ class Event(models.Model):
 
 
 class Character(models.Model):
-    MALE = '男'
-    FEMALE = '女'
-    UNKNOWN = '不明'
-    JENDER_LIST=[
-        (MALE, '男'),
-        (FEMALE, '女'),
-        (UNKNOWN, '不明'),
+    AFFILIATION = [
+        ('帝丹小学校', '帝丹小学校'), # 左が表示、右が選択肢
+        ('帝丹高校', '帝丹高校'),
+        ('東都大学', '東都大学'),
+        ('黒の組織', '黒の組織'),
+        ('毛利家', '毛利家'),
+        ('警察', '警察'),
+        ('FBI', 'FBI'),
+        ('SIS', 'SIS'),
+        ('NOC', 'NOC'),
+        ('赤井家', '赤井家')
+    ]
+
+    PROFESSION = [
+        ('小学生','小学生'),
+        ('高校生','高校生'),
+        ('警察官','警察官'),
+        ('探偵','探偵'),
+        ('FBI捜査官', 'FBI捜査官'),
     ]
     name = models.CharField(max_length=30)
-    gender = models.CharField(max_length=2,
-                              choices=JENDER_LIST)
-    age = models.IntegerField(blank=True, null=True) # 約何歳や何歳以上したい場合は、 complement に記載。
-    birthday = models.DateField(blank=True, null=True)
-    profession = models.CharField(max_length=50)
+    belong_to = models.CharField(max_length=30, choices=AFFILIATION)
+    profession = models.CharField(max_length=30, null=True, choices=PROFESSION)
+    skill = models.CharField(blank=True, null=True, max_length=200)
     complement = models.TextField(blank=True, null=True)
     # 付与する情報の例。
     # 登場の仕方（実際に登場するのではなく、会話中で名前が出てくる。思考や回想シーンの中で登場する。）
@@ -83,8 +97,7 @@ class Character(models.Model):
     
     ### 他のテーブルとの関連
     chapter = models.ManyToManyField(Chapter)
-    case_solved_by = models.ManyToManyField(Case)
-    event_related_to = models.ManyToManyField(Event)
+    event_related_to = models.ManyToManyField(Event, blank=True)
 
     ### object 自体の表示方法を指定
     def __str__(self):
