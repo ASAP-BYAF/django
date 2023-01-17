@@ -1,49 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-</head>
-<body>
-    <h1>Always, there is only one truth !!!</h1>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>GENDER</th>
-            <th>AGE</th>
-            <th>BIRTHDAY</th>
-            <th>PROFESSION</th>
-            <th>CHAPTER(初登場)</th>
-            <th>COMPLEMENT</th>
-        </tr>
-    {% for item in chara_all_list %}
-        <tr>
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.gender}}</td>
-            <td>{{item.age}}</td>
-            <td>{{item.birthday|date:"m/d" }}</td>
-            <td>{{item.profession}}</td>
-            {% comment %} <td>
-                <ul>
-                {% for chapter in item.chapter.all %}
-                    <li>
-                        {{chapter.name}}
-                    </li>
-                {% endfor %}
-                </ul>
-            </td> {% endcomment %}
-            <td>
-                Volume.{{item.chapter.first.case.volume.number}} -
-                Case.{{item.chapter.first.case.number}} -
-                File.{{item.chapter.first.number}}
-            </td>
-            <td>{{item.complement}}</td>
-        </tr>
-    {% endfor %}
-    </table>
-</body>
-</html>
+{% extends "conan_db_app/base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block main %}
+<h1 class="display-4 text-primary">{{title}}</h1>
+<h1 class="text-9xl">Home</h1>
+{% endblock %}
