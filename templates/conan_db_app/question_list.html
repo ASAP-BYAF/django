@@ -8,6 +8,8 @@
     <div  class="flex-col">
     {% for question in object_list %}
         <div class="w-[30vw] flex-1 mx-auto block m-8 p-8 bg-white border-solid border-2 rounded-md border-gray-300" >
+            <h3>{{question.jenre}}<h3>
+            <h3>{{question.kind}}<h3>
             <h3>{{question.content}}<h3>
             <ul class="[&>li]:bg-amber-50 [&>li]:my-2 [&>li]:border-solid 
                 [&>li]:border-2 [&>li]:rounded-md [&>li]:border-gray-300 ">
@@ -29,18 +31,25 @@
     </div>
 
     {% if page_obj.has_previous %}
-        <a class="text-lg" href="{% url 'conan_db_app:question_list' %}?page=1">
+        <a id="question-list-page-first" class="text-lg" href="{% url 'conan_db_app:question_list' %}?page=1">
         &laquo; first</a>
-        <a class="text-lg" href="{% url 'conan_db_app:question_list' %}?page={{page_obj.previous_page_number}}">
+        <a id="question-list-page-prev" class="text-lg" href="{% url 'conan_db_app:question_list' %}?page={{page_obj.previous_page_number}}">
         &laquo; prev</a>
     {% endif %}
 
     {% if page_obj.has_next %}
-        <a class="text-lg" href="{% url 'conan_db_app:question_list' %}?page={{page_obj.next_page_number}}" >
+        <a id="question-list-page-next" class="text-lg" href="{% url 'conan_db_app:question_list' %}?page={{page_obj.next_page_number}}" >
         next &raquo;</a>
-        <a class="text-lg" href="{% url 'conan_db_app:question_list' %}?page={{page_obj.paginator.num_pages}}">
+        <a id="question-list-page-last" class="text-lg" href="{% url 'conan_db_app:question_list' %}?page={{page_obj.paginator.num_pages}}">
         last &raquo;</a>
     {% endif %}
+
+    <form id="refine-question-form" action="{% url 'conan_db_app:question_list' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="click">
+    </form>
+    <div>{{test}}</div>
 </main>
 
 {% endblock %}
