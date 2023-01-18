@@ -63,31 +63,23 @@ class Event(models.Model):
     def __str__(self):
         return f'{self.content[0:15]} ...'
 
+class Affiliation(models.Model):
+    name = models.CharField(max_length=30)
+
+    ### object 自体の表示方法を指定
+    def __str__(self):
+        return self.name
+
+class Profession(models.Model):
+    name = models.CharField(max_length=30)
+
+    ### object 自体の表示方法を指定
+    def __str__(self):
+        return self.name
+
 
 class Character(models.Model):
-    AFFILIATION = [
-        ('帝丹小学校', '帝丹小学校'), # 左が表示、右が選択肢
-        ('帝丹高校', '帝丹高校'),
-        ('東都大学', '東都大学'),
-        ('黒の組織', '黒の組織'),
-        ('毛利家', '毛利家'),
-        ('警察', '警察'),
-        ('FBI', 'FBI'),
-        ('SIS', 'SIS'),
-        ('NOC', 'NOC'),
-        ('赤井家', '赤井家')
-    ]
-
-    PROFESSION = [
-        ('小学生','小学生'),
-        ('高校生','高校生'),
-        ('警察官','警察官'),
-        ('探偵','探偵'),
-        ('FBI捜査官', 'FBI捜査官'),
-    ]
     name = models.CharField(max_length=30)
-    belong_to = models.CharField(max_length=30, choices=AFFILIATION)
-    profession = models.CharField(max_length=30, null=True, choices=PROFESSION)
     skill = models.CharField(blank=True, null=True, max_length=200)
     complement = models.TextField(blank=True, null=True)
     # 付与する情報の例。
@@ -98,6 +90,8 @@ class Character(models.Model):
     ### 他のテーブルとの関連
     chapter = models.ManyToManyField(Chapter)
     event_related_to = models.ManyToManyField(Event, blank=True)
+    belong_to = models.ManyToManyField(Affiliation)
+    profession = models.ManyToManyField(Profession, blank=True)
 
     ### object 自体の表示方法を指定
     def __str__(self):
