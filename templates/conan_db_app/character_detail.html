@@ -15,11 +15,19 @@
                 <table class="w-[100vw] md:w-[25vw] font-mono text-center text-xl mx-auto [&_th]:text-amber-500">
                     <tr>
                         <th>所属</th>
-                        <td>{{character.belong_to}}</td>
+                        <td>
+                            {% for i_belong_to in character.belong_to.all %}
+                                {{i_belong_to.name}}、
+                            {% endfor %}
+                        </td>
                     </tr>
                     <tr>
                         <th>職業</th>
-                        <td>{{character.profession}}</td>
+                        <td>
+                            {% for i_profession in character.profession.all %}
+                                {{i_profession.name}}、
+                            {% endfor %}
+                        </td>
                     </tr>
                     <tr>
                         <th>特技</th>
