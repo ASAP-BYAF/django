@@ -53,32 +53,24 @@ class QuestionListView(ListView, FormMixin):
     form_class = RefineQuestionForm
     
     def get_queryset(self):
-        # POST リクエストパラメータがあれば、それでフィルタする
         if self.request.POST:
             queryset = Question.objects.filter(jenre=self.request.POST['jenre'])\
                 .filter(kind=self.request.POST['kind'])
-
-        # GETリクエストパラメータがあれば、それでフィルタする
         elif self.request.GET:
-            # queryset = queryset.object.filter(jenre=keyword)
             queryset = Question.objects.filter(jenre=self.request.GET.get('jenre'))\
                 .filter(kind=self.request.GET.get('kind'))
-
-        # 最初のアクセス時はリクエストパラメータが存在しないので全質問データを返す。
         else:
             queryset = Question.objects.all()
         return queryset
         
     def get_context_data(self, **kwargs):
-        print(self.request.GET)
-        if not self.request.GET:
-            # Do this...
-            print('null')
-            return super().get_context_data(test='test')
-        else:
-            # GET リクエストパラメータが存在するときこれをフォームにセットする。
+        if self.request.POST:
+            return super().get_context_data(form=self.form_class(self.request.POST))
+        elif self.request.GET:
             return super().get_context_data(form=self.form_class(self.request.GET))
+        else:
+            return super().get_context_data()
     
     def post(self, request):
-        form = self.form_class(request.POST)
+        # form = self.form_class(request.POST)
         return self.get(request)
