@@ -25,7 +25,7 @@ class Case(models.Model):
     number = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=30)
     complement = models.TextField(blank=True, null=True)
-    
+
     ### 他のテーブルとの関連
     kind = models.ManyToManyField(CaseKind, blank=True)
 
@@ -75,9 +75,15 @@ class Affiliation(models.Model):
 class Profession(models.Model):
     name = models.CharField(max_length=30)
 
+    ### 他のテーブルとの関連
+    affiliation = models.ForeignKey(Affiliation, on_delete=models.PROTECT, blank=True, null=True)
+
     ### object 自体の表示方法を指定
     def __str__(self):
-        return self.name
+        if self.affiliation:
+            return f'{self.affiliation.name} -- {self.name}'
+        else:
+            return f'None -- {self.name}'
 
 
 class Character(models.Model):
