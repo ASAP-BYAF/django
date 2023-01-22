@@ -16,7 +16,7 @@
         {% for i_chapter in object.chapter_set.all %}
         <tr>
             {% comment %} <td><a href="{% url 'conan_db_app:chapter_detail' pk=i_chapter.id %}">{{i_chapter.name}}</a></td> {% endcomment %}
-            <td><a href="{% url 'conan_db_app:index' %}">{{i_chapter.volume.number}}巻 {{i_chapter.number}}話 {{i_chapter.name}}</a></td>
+            <td>{{i_chapter.volume.number}}巻 {{i_chapter.number}}話 <a href="{% url 'conan_db_app:index' %}">{{i_chapter.name}}</a></td>
             <td>
                 {% for i_character in i_chapter.character_set.all %}
                 <a href="{% url 'conan_db_app:detail' pk=i_character.id %}">{{i_character.name}}</a>
