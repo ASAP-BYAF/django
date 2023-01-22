@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin
-from .models import Character, Chapter, Question, Affiliation
+from .models import Character, Chapter, Question, Affiliation, Case
 from .forms import QuestionForm, RefineQuestionForm, WithEventForm
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
@@ -22,6 +22,12 @@ class AffiliationListView(ListView):
 
 class AffiliationDetailView(DetailView):
     model = Affiliation
+
+class CaseListView(ListView):
+    model = Case
+
+class CaseDetailView(DetailView):
+    model = Case
 
 class QuestionCreateView(CreateView):
     form_class = QuestionForm

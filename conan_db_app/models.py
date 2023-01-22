@@ -25,6 +25,7 @@ class Case(models.Model):
     ]
 
     number = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=30)
     complement = models.TextField(blank=True, null=True)
     kind = models.CharField(max_length=30, blank=True, null=True, choices=KIND_OF_CASE)
 
