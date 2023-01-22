@@ -12,7 +12,16 @@
         </tr>
     {% for case in object_list %}
         <tr>
-            <td>事件{{case.number}} : <a href="{% url 'conan_db_app:case_detail' pk=case.number %}">{{case.name}}</a></td>
+            <td>事件{{case.number}} : 
+                <span><a href="{% url 'conan_db_app:case_detail' pk=case.number %}">{{case.name}}</a> (
+                    {% for i_chapter in case.chapter_set.all %}
+                        {% ifchanged  i_chapter.volume.number %}
+                            {{i_chapter.volume.number}}巻 
+                        {% endifchanged %}
+                        {% comment %} <li>{{i_chapter.name}}</li> {% endcomment %}
+                    {% endfor %}
+                )</span>
+            </td>
         </tr>
     {% endfor %}
     </table>
