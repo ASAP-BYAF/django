@@ -1,0 +1,21 @@
+{% extends "conan_db_app/base.html" %}
+{% load static %}
+
+{% block title %}組織詳細{% endblock %}
+
+{% block main %}
+<main>
+    <h1>真実はいつも一つ</h1>
+    <p>{{object.name}}</p>
+    <table>
+    {% for i_character in object.character_set.all %}
+        <tr>
+            <th>所属者</th>
+        </tr>
+        <tr>
+            <td><a href="{% url 'conan_db_app:detail' pk=i_character.id page=1 %}">{{i_character.name}}</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</main>
+{% endblock %}

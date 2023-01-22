@@ -9,6 +9,7 @@ urlpatterns = [
     path('chara_detail/<int:pk>', views.chara_detail_func, name='detail'),
     path('chara_detail/<int:pk>/<int:page>', views.chara_detail_func, name='detail'),
     path('affiliation_list/', views.AffiliationListView.as_view(), name='affiliation_list'),
+    path('affiliation_detail/<int:pk>', views.AffiliationDetailView.as_view(), name='affiliation_detail'),
     path('case_list/', views.IndexView.as_view(), name='case'),
     path('wiseword_list/', views.IndexView.as_view(), name='wiseword'),
     path('question_create/', views.QuestionCreateView.as_view(), name='question_create'),

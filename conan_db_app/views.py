@@ -20,6 +20,9 @@ class CharaListView(ListView):
 class AffiliationListView(ListView):
     model = Affiliation
 
+class AffiliationDetailView(DetailView):
+    model = Affiliation
+
 class QuestionCreateView(CreateView):
     form_class = QuestionForm
     template_name = 'conan_db_app/question_form.html'
