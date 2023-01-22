@@ -1,0 +1,35 @@
+{% extends "conan_db_app/base.html" %}
+{% load static %}
+
+{% block title %}事件詳細{% endblock %}
+
+{% block main %}
+<main>
+    <h1>真実はいつも一つ</h1>
+    <p>{{object.name}}</p>
+    <table>
+        <tr>
+            <th>話数</th>
+            <th>登場人物</th>
+            <th>重要な出来事</th>
+        </tr>
+        {% for i_chapter in object.chapter_set.all %}
+        <tr>
+            {% comment %} <td><a href="{% url 'conan_db_app:chapter_detail' pk=i_chapter.id %}">{{i_chapter.name}}</a></td> {% endcomment %}
+            <td><a href="{% url 'conan_db_app:index' %}">{{i_chapter.name}}</a></td>
+            <td>
+                {% for i_character in i_chapter.character_set.all %}
+                <a href="{% url 'conan_db_app:detail' pk=i_character.id %}">{{i_character.name}}</a>
+                {% endfor %}
+            </td>
+            <td>
+                {% for i_event in i_chapter.event_set.all %}
+                    <p>{{ i_event.content }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'conan_db_app:case_list' %}">事件リストに戻る</a>
+</main>
+{% endblock %}
