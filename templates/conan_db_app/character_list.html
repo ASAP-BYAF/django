@@ -12,8 +12,7 @@
         </tr>
     {% for character in object_list %}
         <tr>
-            <td>{{character.name}}</td>
-            <td><a href="{% url 'conan_db_app:detail' pk=character.id page=1 %}">詳細</a></td>
+            <td><a href="{% url 'conan_db_app:detail' pk=character.id page=1 %}">{{character.name}}</a></td>
         </tr>
     {% endfor %}
     </table>
