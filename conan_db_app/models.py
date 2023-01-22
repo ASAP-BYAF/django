@@ -31,7 +31,7 @@ class Case(models.Model):
 
     ### object 自体の表示方法を指定
     def __str__(self):
-        return f'Case.{self.number}'
+        return f'Case.{self.number} : {self.name}'
 
     ### 並び順を指定
     class Meta:
