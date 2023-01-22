@@ -11,9 +11,17 @@
     {% for i_character in object.character_set.all %}
         <tr>
             <th>所属者</th>
+            <th>役割</th>
         </tr>
         <tr>
             <td><a href="{% url 'conan_db_app:detail' pk=i_character.id page=1 %}">{{i_character.name}}</a></td>
+            <td>
+            {% for i_profession in i_character.profession.all %}
+                {% if i_profession.affiliation == object %}
+                    {{ i_profession.name }}
+                {% endif %}
+            {% endfor %}
+            </td>
         </tr>
     {% endfor %}
     </table>
