@@ -24,7 +24,9 @@
             </td>
             <td>
                 {% for i_event in i_chapter.event_set.all %}
-                    <p>{{ i_event.content }}</p>
+                    <ul>
+                        <li>{{ i_event.content }}</li>
+                    </ul>
                 {% endfor %}
             </td>
         </tr>
