@@ -39,7 +39,8 @@ class Case(models.Model):
 
 class Chapter(models.Model):
     name = models.CharField(max_length=30)
-    number = models.IntegerField()
+    number_in_volume = models.IntegerField()
+    number_in_all = models.IntegerField()
     complement = models.TextField(blank=True, null=True)
 
     ### 他のテーブルとの関連
@@ -48,11 +49,11 @@ class Chapter(models.Model):
 
     ### object 自体の表示方法を指定
     def __str__(self):
-        return f'Volume.{self.volume.number} - File.{self.number} : {self.name}'
+        return f'Volume.{self.volume.number} - File.{self.number_in_volume} : {self.name}'
 
     ### 並び順を指定
     class Meta:
-        ordering = ('number',)
+        ordering = ('number_in_all',)
 
 class Event(models.Model):
     content = models.TextField(null=True)
