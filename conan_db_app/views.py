@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin
-from .models import Character, Chapter, Question
+from .models import Character, Chapter, Question, Affiliation
 from .forms import QuestionForm, RefineQuestionForm, WithEventForm
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
@@ -16,6 +16,9 @@ class IndexView(TemplateView):
 
 class CharaListView(ListView):
     model = Character
+
+class AffiliationListView(ListView):
+    model = Affiliation
 
 class QuestionCreateView(CreateView):
     form_class = QuestionForm
