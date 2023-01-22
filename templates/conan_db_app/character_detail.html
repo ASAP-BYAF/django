@@ -45,7 +45,7 @@
     <section class="w-[30vw] mx-auto border-x-2 border-solid border-black">
     <h1 class="py-4 text-2xl text-center">
         登場話数
-        ({{chapter_list.number}}/{{chapter_list.paginator.num_pages}} ページ)
+        ({{chapter_page.number}}/{{chapter_page.paginator.num_pages}} ページ)
     </h1>
     <hr class="h-2 bg-amber-600 mb-7">
     <ul class="list-none">
@@ -62,21 +62,21 @@
             </ul>
         </li>
 
-        {% if chapter_list.has_previous %}
+        {% if chapter_page.has_previous %}
         <li>
             <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
                 <li class="page-item">
                     <a class="border-2 border-solid border-amber-300 rounded-2xl px-4 bg-amber-200 
-                                transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
-                                duration-500" 
-                    href="{% url 'conan_db_app:detail' pk=character.id page=1 %}">
+                        transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
+                        duration-500"
+                        href="javascript:plusPageAndSendForm({{1}})">
                     &laquo; first</a>
                 </li>
                 <li class="page-item">
                     <a class="border-2 border-solid border-amber-300 rounded-2xl px-4 bg-amber-200 
-                                transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
-                                duration-500" 
-                    href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.previous_page_number %}">
+                        transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
+                        duration-500"
+                        href="javascript:plusPageAndSendForm({{chapter_page.previous_page_number}})">
                     &laquo; prev</a>
                 </li>
             </ul>
@@ -87,7 +87,7 @@
             text-center text-xl">fisrt</p>
         {% endif %}
 
-        {% for item in chapter_list %}
+        {% for item in chapter_page %}
         {% ifchanged  item.volume.number %}
         <li>
             <ul class="flex [&>li]:flex-1">
@@ -113,40 +113,46 @@
                 {% endfor %}
             </li>
             <li class="p-2 border-l-4 border-solid border-gray-300
-                        before:rounded-full before:border-2 before:border-solid before:border-amber-500 before:bg-white
-                        before:content-[''] before:inline-block
-                        before:relative before:-left-5 before:top-1 
-                        before:w-5 before:h-5">
+                before:rounded-full before:border-2 before:border-solid before:border-amber-500 before:bg-white
+                before:content-[''] before:inline-block
+                before:relative before:-left-5 before:top-1 
+                before:w-5 before:h-5">
                         {{item.number}} 話 ({{item.name}})
             </li>
         </ul>
         </li>
         {% endfor %}
-        {% if chapter_list.has_next %}
+        {% if chapter_page.has_next %}
         <li>
             <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
                 <li class="page-item">
                     <a class="border-2 border-solid border-amber-300 rounded-2xl px-4 bg-amber-200 
-                                transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
-                                duration-500" 
-                    href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.next_page_number %}">
+                        transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
+                        duration-500"
+                        href="javascript:plusPageAndSendForm({{chapter_page.next_page_number}})">
                     next &raquo;</a>
                 </li>
                 <li class="page-item">
                     <a class="border-2 border-solid border-amber-300 rounded-2xl px-4 bg-amber-200 
-                                transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
-                                duration-500" 
-                    href="{% url 'conan_db_app:detail' pk=character.id page=chapter_list.paginator.num_pages %}">
+                        transition-all hover:drop-shadow-xl hover:bg-white hover:scale-110 inline-block
+                        duration-500"
+                        href="javascript:plusPageAndSendForm({{chapter_page.paginator.num_pages}})">
                     last &raquo;</a>
                 </li>
             </ul>
         </li>
         {% else %}
             <p class="border-t-4 border-solid border-gray-300 block 
-            w-[20%] mx-auto py-4
-            text-center text-xl">last</p>
+                w-[20%] mx-auto py-4 text-center text-xl">last</p>
         {% endif %}
     </ul>
     </section>
+    <form action="{% url 'conan_db_app:detail' character.id %}" method="post" name="with_event">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="click">
+        <button class="btn">
+            update</button>
+    </form>
 </main>
 {% endblock %}

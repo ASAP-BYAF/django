@@ -22,3 +22,6 @@ class RefineQuestionForm(forms.ModelForm):
             'kind': forms.RadioSelect(),
             'jenre': forms.RadioSelect()
         }
+
+class WithEventForm(forms.Form):
+    with_event = forms.BooleanField(label='重要なイベントのみを表示する', required=False)

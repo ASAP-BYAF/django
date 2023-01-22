@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin
 from .models import Character, Chapter, Question
-from .forms import QuestionForm, RefineQuestionForm
+from .forms import QuestionForm, RefineQuestionForm, WithEventForm
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.contrib import messages  # メッセージフレームワーク
@@ -16,20 +16,6 @@ class IndexView(TemplateView):
 
 class CharaListView(ListView):
     model = Character
-
-def chara_detail_func(request, pk, page):        
-
-    character = Character.objects.get(id = pk)
-    chapter = character.chapter.all().order_by('volume_id', 'number')
-    chapter_page = Paginator(chapter, 5)
-    event = character.event_related_to.all()
-    context ={
-        'character' : character, # html 側で for で回すので、イテラブルとして渡す。
-        # 'chapter_list': chapter,
-        'chapter_list': chapter_page.get_page(page),
-        'event_list': event,
-    }
-    return render(request, 'conan_db_app/character_detail.html', context)
 
 class QuestionCreateView(CreateView):
     form_class = QuestionForm
@@ -74,3 +60,40 @@ class QuestionListView(ListView, FormMixin):
     def post(self, request):
         # form = self.form_class(request.POST)
         return self.get(request)
+
+
+
+def chara_detail_func(request, pk, page=1):
+    page_num = 5
+    character = Character.objects.get(id = pk)
+    event = character.event_related_to.all()
+
+    if request.method == 'POST':
+        # フォームの用意
+        form = WithEventForm(request.POST)
+
+        if request.POST.get('with_event'):
+            chapter_list = character.chapter.filter(event = True)
+        else :
+            chapter_list = character.chapter.all()
+
+    # GETアクセス時の処理
+    else:
+        # フォームの用意
+        form = WithEventForm()
+
+        chapter_list = character.chapter.all()
+
+    chapter_list = chapter_list.order_by('volume_id', 'number')
+
+    context = {
+    'character' : character, # html 側で for で回すので、イテラブルとして渡す。
+    'chapter_page': queryset_to_page(chapter_list, page_num, page), 
+    'event_list': event,
+    'form':form
+    }
+    return render(request, 'conan_db_app/character_detail.html', context)
+
+def queryset_to_page(queryset, page_num, page):
+    page_list = Paginator(queryset, page_num)
+    return page_list.get_page(page)
