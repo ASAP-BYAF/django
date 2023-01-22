@@ -96,7 +96,7 @@ def chara_detail_func(request, pk, page=1):
 
         chapter_list = character.chapter.all()
 
-    chapter_list = chapter_list.order_by('volume_id', 'number')
+    chapter_list = chapter_list.order_by('number_in_all')
 
     context = {
     'character' : character, # html 側で for で回すので、イテラブルとして渡す。

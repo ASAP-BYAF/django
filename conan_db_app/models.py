@@ -14,20 +14,20 @@ class Volume(models.Model):
     class Meta:
         ordering = ('number',)
 
-class Case(models.Model):
-    KIND_OF_CASE = [
-        ('黒の組織','黒の組織'),
-        ('恋愛','恋愛'),
-        ('警察関係','警察関係'),
-        ('KID','KID'),
-        ('FBI', 'FBI'),
-        ('赤井家', '赤井家')
-    ]
+class CaseKind(models.Model):
+    name = models.CharField(max_length=30)
 
+    ### object 自体の表示方法を指定
+    def __str__(self):
+        return self.name
+
+class Case(models.Model):
     number = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=30)
     complement = models.TextField(blank=True, null=True)
-    kind = models.CharField(max_length=30, blank=True, null=True, choices=KIND_OF_CASE)
+    
+    ### 他のテーブルとの関連
+    kind = models.ManyToManyField(CaseKind, blank=True)
 
     ### object 自体の表示方法を指定
     def __str__(self):

@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import Character, Chapter, Case, Volume, Event, Question, Profession, Affiliation
+from .models import Character, Chapter, CaseKind, Case, Volume, Event, Question, Profession, Affiliation
 
 # Register your models here.
 
 admin.site.register(Character)
 admin.site.register(Chapter)
+admin.site.register(CaseKind)
 admin.site.register(Case)
 admin.site.register(Volume)
 admin.site.register(Event)
