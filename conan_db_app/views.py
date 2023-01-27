@@ -23,8 +23,21 @@ class AffiliationListView(ListView):
 class AffiliationDetailView(DetailView):
     model = Affiliation
 
-class CaseListView(ListView):
+class CaseListView(ListView, FormMixin):
     model = Case
+    paginate_by = 3
+    form_class = WithEventForm
+
+    def get_queryset(self):
+        if self.request.POST.get('with_event'):
+            case_number_with_event = [i_case.number for i_case in Case.objects.all() if i_case.chapter_set.filter(event = True)]
+            queryset = Case.objects.filter(number__in=case_number_with_event)
+        else :
+            queryset = Case.objects.all()
+        return queryset
+
+    def post(self, request, page = None):
+        return self.get(request)
 
 class CaseDetailView(DetailView):
     model = Case

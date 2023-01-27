@@ -64,5 +64,40 @@
         </tr>
     {% endfor %}
     </table>
+    <form action="{% url 'conan_db_app:case_list' %}" method="post" name="with_event">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="click">
+        <button class="btn">
+            update</button>
+    </form>
+    {% if page_obj.has_previous %}
+    <li>
+        <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
+            <li class="page-item">
+                <a href="javascript:plusPageAndSendForm({{1}})">
+                &laquo; first</a>
+            </li>
+            <li class="page-item">
+                <a href="javascript:plusPageAndSendForm({{page_obj.previous_page_number}})">
+                &laquo; prev</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if page_obj.has_next %}
+    <li>
+        <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
+            <li class="page-item">
+                <a href="javascript:plusPageAndSendForm({{page_obj.next_page_number}})">
+                next &raquo;</a>
+            </li>
+            <li class="page-item">
+                <a href="javascript:plusPageAndSendForm({{page_obj.paginator.num_pages}})">
+                last &raquo;</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
 </main>
 {% endblock %}
