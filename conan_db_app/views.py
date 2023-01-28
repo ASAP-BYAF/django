@@ -38,7 +38,8 @@ class CaseListView(ListView, FormMixin):
             case_with_kind = []
             for i_case in Case.objects.all():
                 for i_kind in i_case.kind.all():
-                    if any(i_kind.name in j_kind for j_kind in kind_list):
+                    # if any(i_kind.name in j_kind for j_kind in kind_list):
+                    if i_kind.name in kind_list:
                         print(f'{i_case.name}:  あり')
                         case_with_kind.append(i_case.number)
                         break
