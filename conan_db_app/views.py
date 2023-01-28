@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin
 from .models import Character, Chapter, Question, Affiliation, Case
-from .forms import QuestionForm, RefineQuestionForm, WithEventForm
+from .forms import QuestionForm, RefineQuestionForm, WithEventForm, WithEventForm2
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.contrib import messages  # メッセージフレームワーク
@@ -29,12 +29,20 @@ class CaseListView(ListView, FormMixin):
     form_class = WithEventForm
 
     def get_queryset(self):
-        if self.request.POST.get('with_event'):
+        if self.request.POST.get('with_event') or self.request.POST.get('with_event2'):
             case_number_with_event = [i_case.number for i_case in Case.objects.all() if i_case.chapter_set.filter(event = True)]
             queryset = Case.objects.filter(number__in=case_number_with_event)
         else :
             queryset = Case.objects.all()
         return queryset
+
+    def get_context_data(self, **kwargs):
+        form_list = {
+            'form2': WithEventForm2(**self.get_form_kwargs())
+        }
+        print(self.request.POST)
+        kwargs.update(form_list)
+        return super().get_context_data(**kwargs)
 
     def post(self, request, page = None):
         return self.get(request)

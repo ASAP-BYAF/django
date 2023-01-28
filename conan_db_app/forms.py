@@ -25,3 +25,6 @@ class RefineQuestionForm(forms.ModelForm):
 
 class WithEventForm(forms.Form):
     with_event = forms.BooleanField(label='重要なイベントのみを表示する', required=False)
+
+class WithEventForm2(forms.Form):
+    with_event2 = forms.BooleanField(label='重要なイベントのみを表示する', required=False)
