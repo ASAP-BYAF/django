@@ -31,5 +31,5 @@ class WithEventForm2(forms.Form):
 
 class CaseKindForm(forms.Form):
     CASE_KIND = [(i_kind.name, i_kind.name) for i_kind in CaseKind.objects.all()]
-    fields = forms.MultipleChoiceField(choices=CASE_KIND, required=False,\
-        widget=forms.CheckboxSelectMultiple())
+    case_kind = forms.MultipleChoiceField(choices=CASE_KIND, required=False,\
+        widget=forms.CheckboxSelectMultiple(), label='事件の種類を絞り込む')

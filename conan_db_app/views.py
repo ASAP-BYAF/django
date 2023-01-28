@@ -29,11 +29,28 @@ class CaseListView(ListView, FormMixin):
     form_class = WithEventForm
 
     def get_queryset(self):
-        if self.request.POST.get('with_event') or self.request.POST.get('with_event2'):
-            case_number_with_event = [i_case.number for i_case in Case.objects.all() if i_case.chapter_set.filter(event = True)]
-            queryset = Case.objects.filter(number__in=case_number_with_event)
+        # if self.request.POST.get('with_event') or self.request.POST.get('with_event2'):
+        #     case_number_with_event = [i_case.number for i_case in Case.objects.all() if i_case.chapter_set.filter(event = True)]
+        #     queryset = Case.objects.filter(number__in=case_number_with_event)
+            
+        if kind_list := self.request.POST.getlist('case_kind'):
+        
+            case_with_kind = []
+            for i_case in Case.objects.all():
+                for i_kind in i_case.kind.all():
+                    if any(i_kind.name in j_kind for j_kind in kind_list):
+                        print(f'{i_case.name}:  あり')
+                        case_with_kind.append(i_case.number)
+                        break
+                    else:
+                        print(f'{i_case.name}:  なし')
+            print(f'case_with_kind = {case_with_kind}')            
+            
+            queryset = Case.objects.filter(number__in=case_with_kind)
+
         else :
             queryset = Case.objects.all()
+
         return queryset
 
     def get_context_data(self, **kwargs):
