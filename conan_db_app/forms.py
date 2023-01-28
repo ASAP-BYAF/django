@@ -1,5 +1,5 @@
 from django import forms
-from .models import Question
+from .models import Question, CaseKind
 
 class QuestionForm(forms.ModelForm):
     class Meta:
@@ -28,3 +28,7 @@ class WithEventForm(forms.Form):
 
 class WithEventForm2(forms.Form):
     with_event2 = forms.BooleanField(label='重要なイベントのみを表示する', required=False)
+
+class CaseKindForm(forms.Form):
+    CASE_KIND = [(i_kind.name, i_kind.name) for i_kind in CaseKind.objects.all()]
+    fields = forms.MultipleChoiceField(choices=CASE_KIND, required=False)

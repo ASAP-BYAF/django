@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin
 from .models import Character, Chapter, Question, Affiliation, Case
-from .forms import QuestionForm, RefineQuestionForm, WithEventForm, WithEventForm2
+from .forms import QuestionForm, RefineQuestionForm, WithEventForm, WithEventForm2, CaseKindForm
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.contrib import messages  # メッセージフレームワーク
@@ -38,7 +38,8 @@ class CaseListView(ListView, FormMixin):
 
     def get_context_data(self, **kwargs):
         form_list = {
-            'form2': WithEventForm2(**self.get_form_kwargs())
+            'form2': WithEventForm2(**self.get_form_kwargs()),
+            'form3': CaseKindForm(**self.get_form_kwargs())
         }
         print(self.request.POST)
         kwargs.update(form_list)
