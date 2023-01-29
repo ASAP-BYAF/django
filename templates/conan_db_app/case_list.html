@@ -80,7 +80,11 @@
             </label>
             <span class="cursor-pointer" id="oc_btn_form3" 
                 onclick="openCloseForm('form3')">＋</span>
-            <div class="hidden" id="option_form3" >{{ field }}</div>
+            <div class="hidden" id="option_form3" >
+                {% for item in field %}
+                    <p>{{ item.tag }}<label>{{ item.choice_label }}</label></p>
+                {% endfor %}
+            </div>
         {% endfor %}
         <p></p>
 
@@ -90,7 +94,11 @@
             </label>
             <span class="cursor-pointer" id="oc_btn_form4" 
                 onclick="openCloseForm('form4')">＋</span>
-            <div class="hidden" id="option_form4" >{{ field }}</div>
+            <div class="hidden" id="option_form4" >
+                {% for item in field %}
+                    <p>{{ item.tag }}<label>{{ item.choice_label }}</label></p>
+                {% endfor %}
+            </div>
         {% endfor %}
         <p></p>
 
@@ -100,7 +108,11 @@
             </label>
             <span class="cursor-pointer" id="oc_btn_form5" 
                 onclick="openCloseForm('form5')">＋</span>
-            <div class="hidden" id="option_form5" >{{ field }}</div>
+            <div class="hidden" id="option_form5" >
+                {% for item in field %}
+                    <p>{{ item.tag }}<label>{{ item.choice_label }}</label></p>
+                {% endfor %}
+            </div>
         {% endfor %}
         <p></p>
 
