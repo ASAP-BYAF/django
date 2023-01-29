@@ -79,6 +79,7 @@
         <button class="btn">
             update</button>
     </form>
+    <button><a href="{% url 'conan_db_app:case_list' %}">クリア</a></button>
     {% if page_obj.has_previous %}
     <li>
         <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
