@@ -37,7 +37,7 @@ class CaseListView(ListView, FormMixin):
         
         # 重要な出来事がに対する絞り込みがあれば当てはまる事件の番号の集合を
         # 集合のリスト refined_case_number_list に登録    
-        if self.request.POST.get('with_event') or self.request.POST.get('with_event2'):
+        if self.request.POST.get('with_event'):
             tmp = set()
             for i_case in Case.objects.all():
                 for i_chapter in i_case.chapter_set.all():
@@ -103,7 +103,6 @@ class CaseListView(ListView, FormMixin):
 
     def get_context_data(self, **kwargs):
         form_list = {
-            'form2': WithEventForm2(**self.get_form_kwargs()),
             'form3': CaseKindForm(**self.get_form_kwargs()),
             'form4': VolumeForm(**self.get_form_kwargs()),
             'form5': CharaForm(**self.get_form_kwargs()),
