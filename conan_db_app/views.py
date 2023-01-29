@@ -31,8 +31,6 @@ class CaseListView(ListView, FormMixin):
 
     def get_queryset(self):
         # 各絞り込みに当てはまる事件の番号の集合を記録
-        # 最後に積集合をとり、すべての絞り込みに一致するものだけに
-        # クエリ検索をかける。
         refined_case_number_list = []
         
         # 重要な出来事がに対する絞り込みがあれば当てはまる事件の番号の集合を
@@ -88,6 +86,8 @@ class CaseListView(ListView, FormMixin):
                     tmp &= {i_case.number for i_case in Case.objects.filter(name__contains=str(i_case_name))}
             refined_case_number_list.append(tmp)
             
+        # すべての絞り込みに対して積集合をとり、当てはまるものだけに
+        # クエリ検索をかける。
         if refined_case_number_list:
             for i, i_refined_set in enumerate(refined_case_number_list, 1):
                 if i == 1:
