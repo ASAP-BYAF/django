@@ -43,7 +43,7 @@
                         {% for i_chapter in case.chapter_set.all|dictsort:"number_in_all" %}
                         <tr>
                             {% comment %} <td><a href="{% url 'conan_db_app:chapter_detail' pk=i_chapter.id %}">{{i_chapter.name}}</a></td> {% endcomment %}
-                            <td>{{i_chapter.volume.number}}巻 {{i_chapter.number_in_volume}}話 <a href="{% url 'conan_db_app:index' %}">{{i_chapter.name}}</a></td>
+                            <td>{{i_chapter.volume.number}}巻 {{i_chapter.number_in_volume}}話 {{i_chapter.name}}</td>
                             <td>
                                 {% for i_character in i_chapter.character_set.all %}
                                 <a href="{% url 'conan_db_app:detail' pk=i_character.id %}">{{i_character.name}}</a>
