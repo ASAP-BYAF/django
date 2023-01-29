@@ -64,7 +64,7 @@
         </tr>
     {% endfor %}
     </table>
-    <form action="{% url 'conan_db_app:case_list' %}" method="post" name="with_event">
+    <form action="{% url 'conan_db_app:case_list' %}" method="post" name="refine_form">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="click">

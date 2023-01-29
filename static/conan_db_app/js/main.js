@@ -63,6 +63,6 @@ function setQueryParam(event) {
 console.log();
 
 function plusPageAndSendForm(page) {
-  document.with_event.action += page + '/';
-  document.with_event.submit();
+  document.refine_form.action += page + '/';
+  document.refine_form.submit();
 }
