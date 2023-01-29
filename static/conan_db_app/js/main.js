@@ -66,3 +66,18 @@ function plusPageAndSendForm(page) {
   document.refine_form.action += page + '/';
   document.refine_form.submit();
 }
+
+function openCloseForm(id){
+  console.log(id);
+  const target_oc_btn = document.getElementById('oc_btn_' + id);
+  const target_opt = document.getElementById('option_' + id);
+  const status = target_oc_btn.textContent;
+  if(status=="＋"){
+    target_oc_btn.textContent = "－";
+    target_opt.style.display= "block";
+  }
+  if(status=="－"){
+    target_oc_btn.textContent = "＋";
+    target_opt.style.display= "none";
+  }
+}

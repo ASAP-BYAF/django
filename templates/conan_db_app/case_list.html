@@ -20,13 +20,10 @@
                             {% ifchanged  i_chapter.volume.number %}
                                 {{i_chapter.volume.number}}巻 
                             {% endifchanged %}
-                            {% comment %} <li>{{i_chapter.name}}</li> {% endcomment %}
                         {% endfor %}
                         ) 
                         {% for i_kind in case.kind.all %}
-                        <
-                            {{ i_kind.name }}
-                        >
+                        < {{ i_kind.name }} >
                         {% endfor %}
                         {% for i_chapter in case.chapter_set.all|dictsort:"number_in_all" %}
                             {% if i_chapter.event_set.first %}
@@ -64,49 +61,83 @@
         </tr>
     {% endfor %}
     </table>
+    <p>絞り込み<button><a class="text-xs" href="{% url 'conan_db_app:case_list' %}">(クリア)</a></button></p>
     <form action="{% url 'conan_db_app:case_list' %}" method="post" name="refine_form">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="click">
-        {{ form3 }}
-        <input type="submit" value="click">
-        {{ form4 }}
-        <input type="submit" value="click">
-        {{ form5 }}
-        <input type="submit" value="click">
-        {{ form6 }}
-        <input type="submit" value="click">
-        <button class="btn">
-            update</button>
+        {% for field in form %}
+            <label>
+                {{ field.label }}
+            </label>
+            <span class="cursor-pointer" id="oc_btn_form" 
+                onclick="openCloseForm('form')">＋</span>
+            <div class="hidden" id="option_form" >{{ field }}</div>
+        {% endfor %}
+        <p></p>
+
+        {% for field in form3 %}
+            <label>
+                {{ field.label}}
+            </label>
+            <span class="cursor-pointer" id="oc_btn_form3" 
+                onclick="openCloseForm('form3')">＋</span>
+            <div class="hidden" id="option_form3" >{{ field }}</div>
+        {% endfor %}
+        <p></p>
+
+        {% for field in form4 %}
+            <label>
+                {{ field.label}}
+            </label>
+            <span class="cursor-pointer" id="oc_btn_form4" 
+                onclick="openCloseForm('form4')">＋</span>
+            <div class="hidden" id="option_form4" >{{ field }}</div>
+        {% endfor %}
+        <p></p>
+
+        {% for field in form5 %}
+            <label>
+                {{ field.label}}
+            </label>
+            <span class="cursor-pointer" id="oc_btn_form5" 
+                onclick="openCloseForm('form5')">＋</span>
+            <div class="hidden" id="option_form5" >{{ field }}</div>
+        {% endfor %}
+        <p></p>
+
+        {% for field in form6 %}
+            <label>
+                {{ field.label}}
+            </label>
+            <span class="cursor-pointer" id="oc_btn_form6" 
+                onclick="openCloseForm('form6')">＋</span>
+            <div class="hidden" id="option_form6" >{{ field }}</div>
+        {% endfor %}
+        <p></p>
+        
+        <button class="btn">更新</button>
     </form>
-    <button><a href="{% url 'conan_db_app:case_list' %}">クリア</a></button>
+    
+    <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
     {% if page_obj.has_previous %}
-    <li>
-        <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
-            <li class="page-item">
-                <a href="javascript:plusPageAndSendForm({{1}})">
-                &laquo; first</a>
-            </li>
-            <li class="page-item">
-                <a href="javascript:plusPageAndSendForm({{page_obj.previous_page_number}})">
-                &laquo; prev</a>
-            </li>
-        </ul>
-    </li>
+        <li class="page-item">
+            <a href="javascript:plusPageAndSendForm({{1}})">
+            &laquo; first</a>
+        </li>
+        <li class="page-item">
+            <a href="javascript:plusPageAndSendForm({{page_obj.previous_page_number}})">
+            &laquo; prev</a>
+        </li>
     {% endif %}
     {% if page_obj.has_next %}
-    <li>
-        <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
-            <li class="page-item">
-                <a href="javascript:plusPageAndSendForm({{page_obj.next_page_number}})">
-                next &raquo;</a>
-            </li>
-            <li class="page-item">
-                <a href="javascript:plusPageAndSendForm({{page_obj.paginator.num_pages}})">
-                last &raquo;</a>
-            </li>
-        </ul>
-    </li>
+        <li class="page-item">
+            <a href="javascript:plusPageAndSendForm({{page_obj.next_page_number}})">
+            next &raquo;</a>
+        </li>
+        <li class="page-item">
+            <a href="javascript:plusPageAndSendForm({{page_obj.paginator.num_pages}})">
+            last &raquo;</a>
+        </li>
     {% endif %}
+    </ul>
 </main>
 {% endblock %}
