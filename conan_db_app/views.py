@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin
 from .models import Character, Chapter, Question, Affiliation, Case
 from .forms import QuestionForm, RefineQuestionForm, WithEventForm,\
-     WithEventForm2, CaseKindForm, VolumeForm, CharaForm
+     WithEventForm2, CaseKindForm, VolumeForm, CharaForm, CaseNameForm
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.contrib import messages  # メッセージフレームワーク
@@ -76,6 +76,17 @@ class CaseListView(ListView, FormMixin):
                 if all([ j_chara in chara_list_i_case for j_chara in chara_list]):
                     tmp.add(i_case.number)
             refined_case_number_list.append(tmp)
+
+        # 事件名による絞り込みがあれば当てはまる事件の番号の集合を
+        # 集合のリスト refined_case_number_list に登録    
+        if case_name := self.request.POST.get('case_name'):
+            case_name_list = case_name.split()
+            for i, i_case_name in enumerate(case_name_list, 1):
+                if i == 1:
+                    tmp = {i_case.number for i_case in Case.objects.filter(name__contains=str(i_case_name))}
+                else:
+                    tmp &= {i_case.number for i_case in Case.objects.filter(name__contains=str(i_case_name))}
+            refined_case_number_list.append(tmp)
             
         if refined_case_number_list:
             for i, i_refined_set in enumerate(refined_case_number_list, 1):
@@ -95,7 +106,8 @@ class CaseListView(ListView, FormMixin):
             'form2': WithEventForm2(**self.get_form_kwargs()),
             'form3': CaseKindForm(**self.get_form_kwargs()),
             'form4': VolumeForm(**self.get_form_kwargs()),
-            'form5': CharaForm(**self.get_form_kwargs())
+            'form5': CharaForm(**self.get_form_kwargs()),
+            'form6': CaseNameForm(**self.get_form_kwargs())
         }
         kwargs.update(form_list)
         return super().get_context_data(**kwargs)

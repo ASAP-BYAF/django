@@ -43,3 +43,7 @@ class CharaForm(forms.Form):
     CHARA_LIST = [(i_chara.name, i_chara.name) for i_chara in Character.objects.all()]
     character = forms.MultipleChoiceField(choices=CHARA_LIST, required=False,\
         widget=forms.CheckboxSelectMultiple(), label='登場人物で絞り込む')
+
+class CaseNameForm(forms.Form):
+    case_name = forms.CharField(max_length=30, required=False,\
+        label='事件名で絞り込む(部分一致 : 最長 30 文字)')
