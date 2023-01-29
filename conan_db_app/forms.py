@@ -1,5 +1,5 @@
 from django import forms
-from .models import Question, CaseKind, Volume
+from .models import Question, CaseKind, Volume, Character
 
 class QuestionForm(forms.ModelForm):
     class Meta:
@@ -32,9 +32,14 @@ class WithEventForm2(forms.Form):
 class CaseKindForm(forms.Form):
     CASE_KIND = [(i_kind.name, i_kind.name) for i_kind in CaseKind.objects.all()]
     case_kind = forms.MultipleChoiceField(choices=CASE_KIND, required=False,\
-        widget=forms.CheckboxSelectMultiple(), label='事件の種類を絞り込む')
+        widget=forms.CheckboxSelectMultiple(), label='事件の種類で絞り込む')
 
 class VolumeForm(forms.Form):
     VOL_LIST = [(i_vol.number, i_vol.number) for i_vol in Volume.objects.all()]
     volume = forms.MultipleChoiceField(choices=VOL_LIST, required=False,\
-        widget=forms.CheckboxSelectMultiple(), label='巻数を絞り込む')
+        widget=forms.CheckboxSelectMultiple(), label='巻数で絞り込む')
+
+class CharaForm(forms.Form):
+    CHARA_LIST = [(i_chara.name, i_chara.name) for i_chara in Character.objects.all()]
+    character = forms.MultipleChoiceField(choices=CHARA_LIST, required=False,\
+        widget=forms.CheckboxSelectMultiple(), label='登場人物で絞り込む')

@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin
 from .models import Character, Chapter, Question, Affiliation, Case
 from .forms import QuestionForm, RefineQuestionForm, WithEventForm,\
-     WithEventForm2, CaseKindForm, VolumeForm
+     WithEventForm2, CaseKindForm, VolumeForm, CharaForm
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.contrib import messages  # メッセージフレームワーク
@@ -61,8 +61,19 @@ class CaseListView(ListView, FormMixin):
             tmp = set()
             for i_case in Case.objects.all():
                 vol_list_i_case = { i_chapter.volume.number for i_chapter in i_case.chapter_set.all()}
-                print(vol_list_i_case)
                 if all([ int(j_vol) in vol_list_i_case for j_vol in vol_list]):
+                    tmp.add(i_case.number)
+            refined_case_number_list.append(tmp)
+            
+        # 登場人物による絞り込みがあれば当てはまる事件の番号の集合を
+        # 集合のリスト refined_case_number_list に登録    
+        if chara_list := self.request.POST.getlist('character'):       
+            tmp = set()
+            for i_case in Case.objects.all():
+                # chara_list_i_case = { i_chapter.character_set.name for i_chapter in i_case.chapter_set.all()}
+                chara_list_i_case = { i_chara.name for i_chapter in i_case.chapter_set.all()\
+                     for i_chara in i_chapter.character_set.all()}
+                if all([ j_chara in chara_list_i_case for j_chara in chara_list]):
                     tmp.add(i_case.number)
             refined_case_number_list.append(tmp)
             
@@ -83,7 +94,8 @@ class CaseListView(ListView, FormMixin):
         form_list = {
             'form2': WithEventForm2(**self.get_form_kwargs()),
             'form3': CaseKindForm(**self.get_form_kwargs()),
-            'form4': VolumeForm(**self.get_form_kwargs())
+            'form4': VolumeForm(**self.get_form_kwargs()),
+            'form5': CharaForm(**self.get_form_kwargs())
         }
         kwargs.update(form_list)
         return super().get_context_data(**kwargs)
