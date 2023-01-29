@@ -29,26 +29,39 @@ class CaseListView(ListView, FormMixin):
     form_class = WithEventForm
 
     def get_queryset(self):
-        # if self.request.POST.get('with_event') or self.request.POST.get('with_event2'):
-        #     case_number_with_event = [i_case.number for i_case in Case.objects.all() if i_case.chapter_set.filter(event = True)]
-        #     queryset = Case.objects.filter(number__in=case_number_with_event)
-            
-        if kind_list := self.request.POST.getlist('case_kind'):
+        # 各絞り込みに当てはまる事件の番号の集合を記録
+        # 最後に積集合をとり、すべての絞り込みに一致するものだけに
+        # クエリ検索をかける。
+        refined_case_number_list = []
         
-            case_with_kind = []
+        # 重要な出来事がに対する絞り込みがあれば当てはまる事件の番号の集合を
+        # 集合のリスト refined_case_number_list に登録    
+        if self.request.POST.get('with_event') or self.request.POST.get('with_event2'):
+            tmp = set()
             for i_case in Case.objects.all():
-                for i_kind in i_case.kind.all():
-                    # if any(i_kind.name in j_kind for j_kind in kind_list):
-                    if i_kind.name in kind_list:
-                        print(f'{i_case.name}:  あり')
-                        case_with_kind.append(i_case.number)
-                        break
-                    else:
-                        print(f'{i_case.name}:  なし')
-            print(f'case_with_kind = {case_with_kind}')            
-            
-            queryset = Case.objects.filter(number__in=case_with_kind)
+                for i_chapter in i_case.chapter_set.all():
+                    if i_chapter.event_set.all():
+                        tmp.add(i_case.number)
+            refined_case_number_list.append(tmp)            
 
+        # 事件の種類による絞り込みがあれば当てはまる事件の番号の集合を
+        # 集合のリスト refined_case_number_list に登録    
+        if kind_list := self.request.POST.getlist('case_kind'):       
+            tmp = set()
+            for i_case in Case.objects.all():
+                kind_list_i_case = [ i_kind.name for i_kind in i_case.kind.all()]
+                if all([ j_kind in kind_list_i_case for j_kind in kind_list]):
+                    tmp.add(i_case.number)
+            refined_case_number_list.append(tmp)
+            
+        if refined_case_number_list:
+            for i, i_refined_set in enumerate(refined_case_number_list, 1):
+                if i == 1:
+                    and_refined_set = i_refined_set
+                else:
+                    and_refined_set &= i_refined_set
+            queryset = Case.objects.filter(number__in=and_refined_set)
+            
         else :
             queryset = Case.objects.all()
 
@@ -59,7 +72,6 @@ class CaseListView(ListView, FormMixin):
             'form2': WithEventForm2(**self.get_form_kwargs()),
             'form3': CaseKindForm(**self.get_form_kwargs())
         }
-        print(self.request.POST)
         kwargs.update(form_list)
         return super().get_context_data(**kwargs)
 
