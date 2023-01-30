@@ -103,10 +103,10 @@ class CaseListView(ListView, FormMixin):
 
     def get_context_data(self, **kwargs):
         form_list = {
-            'form3': CaseKindForm(**self.get_form_kwargs()),
-            'form4': VolumeForm(**self.get_form_kwargs()),
-            'form5': CharaForm(**self.get_form_kwargs()),
-            'form6': CaseNameForm(**self.get_form_kwargs())
+            'form1': CaseKindForm(**self.get_form_kwargs()),
+            'form2': VolumeForm(**self.get_form_kwargs()),
+            'form3': CharaForm(**self.get_form_kwargs()),
+            'form4': CaseNameForm(**self.get_form_kwargs())
         }
         kwargs.update(form_list)
         return super().get_context_data(**kwargs)

@@ -5,7 +5,7 @@
 
 // 前のページがあるときの処理が未設定。
 
-window.addEventListener("load", setQueryParam);
+// window.addEventListener("load", setQueryParam);
 
 // フォーム要素を取得。
 const valueRefineQuestionForm = document.querySelector('#refine-question-form');
@@ -69,15 +69,40 @@ function plusPageAndSendForm(page) {
 
 function openCloseForm(id){
   console.log(id);
-  const target_oc_btn = document.getElementById('oc_btn_' + id);
-  const target_opt = document.getElementById('option_' + id);
-  const status = target_oc_btn.textContent;
-  if(status=="＋"){
-    target_oc_btn.textContent = "－";
-    target_opt.style.display= "block";
+  // 与えられた id の次の要素の表示非表示を切り替える
+  const target_oc_btn = document.getElementById(id); // 切り替えるボタン要素を取得
+  openClose(target_oc_btn, target_oc_btn.nextElementSibling);
+}
+
+window.addEventListener("load", ifChecked());
+
+function ifChecked(){
+  const refine_check = countClass('refine-check');
+  for (let i=0; i<refine_check.length; i++) {
+    target_opt = refine_check[i]; // 選択肢リストが入った <div> 
+    const child_nodes_count = target_opt.childElementCount;
+    for(let j=0; j<child_nodes_count; j++) {
+      if (target_opt.children[j].firstElementChild.checked){
+        openClose(target_opt.previousElementSibling, target_opt)
+        break;
+      }
+    }
   }
-  if(status=="－"){
-    target_oc_btn.textContent = "＋";
-    target_opt.style.display= "none";
+}
+
+function openClose(tgt, tgt2){
+  const stat = tgt.textContent
+  if(stat=="＋"){
+    tgt.textContent = "－";
+    tgt2.style.display= "block";
   }
+  if(stat=="－"){
+    tgt.textContent = "＋";
+    tgt2.style.display= "none";
+  }  
+}
+
+function countClass(cls_name){
+  const num_cls_name = document.getElementsByClassName(cls_name);
+  return num_cls_name;
 }

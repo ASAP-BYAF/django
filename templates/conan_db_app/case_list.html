@@ -68,9 +68,39 @@
             <label>
                 {{ field.label }}
             </label>
-            <span class="cursor-pointer" id="oc_btn_form" 
-                onclick="openCloseForm('form')">＋</span>
-            <div class="hidden" id="option_form" >{{ field }}</div>
+            <span class="cursor-pointer" id="form0" 
+                onclick="openCloseForm('form0')">＋</span>
+            <div class="refine-check hidden">
+                <p>{{ field }}</p>
+            </div>
+        {% endfor %}
+        <p></p>
+
+        {% for field in form1 %}
+            <label>
+                {{ field.label}}
+            </label>
+            <span class="cursor-pointer" id="form1" 
+                onclick="openCloseForm('form1')">＋</span>
+            <div class="refine-check hidden">
+                {% for item in field %}
+                    <p>{{ item.tag }}<label>{{ item.choice_label }}</label></p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <p></p>
+
+        {% for field in form2 %}
+            <label>
+                {{ field.label}}
+            </label>
+            <span class="cursor-pointer" id="form2" 
+                onclick="openCloseForm('form2')">＋</span>
+            <div class="refine-check hidden">
+                {% for item in field %}
+                    <p>{{ item.tag }}<label>{{ item.choice_label }}</label></p>
+                {% endfor %}
+            </div>
         {% endfor %}
         <p></p>
 
@@ -78,9 +108,9 @@
             <label>
                 {{ field.label}}
             </label>
-            <span class="cursor-pointer" id="oc_btn_form3" 
+            <span class="cursor-pointer" id="form3" 
                 onclick="openCloseForm('form3')">＋</span>
-            <div class="hidden" id="option_form3" >
+            <div class="refine-check hidden">
                 {% for item in field %}
                     <p>{{ item.tag }}<label>{{ item.choice_label }}</label></p>
                 {% endfor %}
@@ -92,37 +122,9 @@
             <label>
                 {{ field.label}}
             </label>
-            <span class="cursor-pointer" id="oc_btn_form4" 
+            <span class="cursor-pointer" id="form4" 
                 onclick="openCloseForm('form4')">＋</span>
-            <div class="hidden" id="option_form4" >
-                {% for item in field %}
-                    <p>{{ item.tag }}<label>{{ item.choice_label }}</label></p>
-                {% endfor %}
-            </div>
-        {% endfor %}
-        <p></p>
-
-        {% for field in form5 %}
-            <label>
-                {{ field.label}}
-            </label>
-            <span class="cursor-pointer" id="oc_btn_form5" 
-                onclick="openCloseForm('form5')">＋</span>
-            <div class="hidden" id="option_form5" >
-                {% for item in field %}
-                    <p>{{ item.tag }}<label>{{ item.choice_label }}</label></p>
-                {% endfor %}
-            </div>
-        {% endfor %}
-        <p></p>
-
-        {% for field in form6 %}
-            <label>
-                {{ field.label}}
-            </label>
-            <span class="cursor-pointer" id="oc_btn_form6" 
-                onclick="openCloseForm('form6')">＋</span>
-            <div class="hidden" id="option_form6" >{{ field }}</div>
+            <div class="hidden">{{ field }}</div>
         {% endfor %}
         <p></p>
         
