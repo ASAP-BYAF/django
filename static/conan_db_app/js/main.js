@@ -75,15 +75,33 @@ function openCloseForm(id){
 }
 
 window.addEventListener("load", ifChecked());
+window.addEventListener("load", ifTyped());
 
+// チェックボックス形式のフォームについて一つでもチェックが入っていれば
+// フォーム全体を表示、一つもチェックが入っていなければ、非表示にする。
 function ifChecked(){
   const refine_check = countClass('refine-check');
   for (let i=0; i<refine_check.length; i++) {
-    target_opt = refine_check[i]; // 選択肢リストが入った <div> 
-    const child_nodes_count = target_opt.childElementCount;
+    target_check = refine_check[i]; // 選択肢リストが入った <div> 
+    const child_nodes_count = target_check.childElementCount;
     for(let j=0; j<child_nodes_count; j++) {
-      if (target_opt.children[j].firstElementChild.checked){
-        openClose(target_opt.previousElementSibling, target_opt)
+      if (target_check.children[j].firstElementChild.checked){
+        openClose(target_check.previousElementSibling, target_check)
+        break;
+      }
+    }
+  }
+}
+
+function ifTyped(){
+  const refine_type = countClass('refine-type');
+  for (let i=0; i<refine_type.length; i++) {
+    target_type = refine_type[i]; // 選択肢リストが入った <div> 
+    const child_nodes_count = target_type.childElementCount;
+    for(let j=0; j<child_nodes_count; j++) {
+      if (target_type.children[j].firstElementChild.value.trim()){
+        openClose(target_type.previousElementSibling, target_type)
+        console.log(target_type.children[j].firstElementChild.value);
         break;
       }
     }
