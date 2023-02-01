@@ -79,12 +79,16 @@ class CaseListView(ListView, FormMixin):
         # 集合のリスト refined_case_number_list に登録    
         if case_name := self.request.POST.get('case_name'):
             case_name_list = case_name.split()
-            for i, i_case_name in enumerate(case_name_list, 1):
-                if i == 1:
-                    tmp = {i_case.number for i_case in Case.objects.filter(name__contains=str(i_case_name))}
-                else:
-                    tmp &= {i_case.number for i_case in Case.objects.filter(name__contains=str(i_case_name))}
-            refined_case_number_list.append(tmp)
+            if not case_name_list:
+                pass
+            else:
+                tmp = set()
+                for i, i_case_name in enumerate(case_name_list, 1):
+                    if i == 1:
+                        tmp = {i_case.number for i_case in Case.objects.filter(name__contains=str(i_case_name))}
+                    else:
+                        tmp &= {i_case.number for i_case in Case.objects.filter(name__contains=str(i_case_name))}
+                refined_case_number_list.append(tmp)
             
         # すべての絞り込みに対して積集合をとり、当てはまるものだけに
         # クエリ検索をかける。
