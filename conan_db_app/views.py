@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin
-from .models import Character, Chapter, Question, Affiliation, Case
+from .models import Character, Chapter, Question, Affiliation, Case, Wiseword
 from .forms import QuestionForm, RefineQuestionForm, WithEventForm,\
      WithEventForm2, CaseKindForm, VolumeForm, CharaForm, CaseNameForm
 from django.core.paginator import Paginator
@@ -23,6 +23,9 @@ class AffiliationListView(ListView):
 
 class AffiliationDetailView(DetailView):
     model = Affiliation
+
+class WisewordListView(ListView):
+    model = Wiseword
 
 class CaseListView(ListView, FormMixin):
     model = Case

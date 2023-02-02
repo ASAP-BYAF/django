@@ -1,0 +1,25 @@
+{% extends "conan_db_app/base.html" %}
+{% load static %}
+
+{% block title %}名言リスト{% endblock %}
+
+{% block main %}
+<main>
+    <h1>真実はいつも一つ</h1>
+    <table>
+        <tr>
+            <th>内容</th>
+            <th>人物</th>
+            <th>話数</th>
+        </tr>
+    {% for i_wiseword in object_list %}
+        <tr>
+            <td>{{i_wiseword.content}}</td>
+            <td>{{i_wiseword.character.name}}</td>
+            <td>{{i_wiseword.chapter.volume.number}}巻
+                {{i_wiseword.chapter.number_in_volume}}話</td>
+        </tr>
+    {% endfor %}
+    </table>
+</main>
+{% endblock %}
