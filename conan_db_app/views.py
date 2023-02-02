@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin
 from .models import Character, Chapter, Question, Affiliation, Case, Wiseword
 from .forms import QuestionForm, RefineQuestionForm, WithEventForm,\
-     WithEventForm2, CaseKindForm, VolumeForm, CharaForm, CaseNameForm
+    CaseKindForm, VolumeForm, CharaForm, CaseNameForm, WisewordForm
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.contrib import messages  # メッセージフレームワーク
@@ -36,6 +36,13 @@ class WisewordListView(ListView, FormMixin):
     def post(self, request, page = None):
         return self.get(request)
 
+    def get_context_data(self, **kwargs):
+        form_list = {
+            'form1': WisewordForm(**self.get_form_kwargs()),
+        }
+        kwargs.update(form_list)
+        return super().get_context_data(**kwargs)
+
     def get_queryset(self):
         # 各絞り込みに当てはまる事件の番号の集合を記録
         refined_wiseword_number_list = []
@@ -47,6 +54,21 @@ class WisewordListView(ListView, FormMixin):
                 if any([ j_chara == i_wiseword.character.name for j_chara in chara_list]):
                     tmp.add(i_wiseword.id)
             refined_wiseword_number_list.append(tmp)
+
+        # 名言の内容による絞り込みがあれば当てはまる事件の番号の集合を
+        # 集合のリスト refined_case_number_list に登録    
+        if wiseword_char := self.request.POST.get('wiseword_char'):
+            wiseword_char_list = wiseword_char.split()
+            if not wiseword_char_list:
+                pass
+            else:
+                tmp = set()
+                for i, i_wiseword_char in enumerate(wiseword_char_list, 1):
+                    if i == 1:
+                        tmp = {i_wiseword.id for i_wiseword in Wiseword.objects.filter(content__contains=str(i_wiseword_char))}
+                    else:
+                        tmp &= {i_wiseword.id for i_wiseword in Wiseword.objects.filter(content__contains=str(i_wiseword_char))}
+                refined_wiseword_number_list.append(tmp)
 
         if refined_wiseword_number_list:
             for i, i_refined_set in enumerate(refined_wiseword_number_list, 1):

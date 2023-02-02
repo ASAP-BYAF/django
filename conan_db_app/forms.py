@@ -47,3 +47,7 @@ class CharaForm(forms.Form):
 class CaseNameForm(forms.Form):
     case_name = forms.CharField(max_length=30, required=False,\
         label='事件名で絞り込む(部分一致 : 最長 30 文字)')
+
+class WisewordForm(forms.Form):
+    wiseword_char = forms.CharField(max_length=100, required=False,\
+        label='事件名で絞り込む(部分一致 : 最長 100 文字)')
