@@ -109,6 +109,17 @@ class Character(models.Model):
     class Meta:
         ordering = ('id',)
 
+class Wiseword(models.Model):
+    content = models.CharField(max_length=200)
+
+    ### 他のテーブルとの関連
+    chapter = models.ForeignKey(Chapter, on_delete=models.PROTECT, default=1)
+    character = models.ForeignKey(Character, on_delete=models.PROTECT, default=1)
+
+    ### object 自体の表示方法を指定
+    def __str__(self):
+        return f'{self.character.name} --- {self.content[0:15]}'
+
 class Question(models.Model):
     KIND_OF_QUESTION=[
         ( 'question', '問題'),
