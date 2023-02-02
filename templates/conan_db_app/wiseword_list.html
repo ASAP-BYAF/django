@@ -30,8 +30,10 @@
             <span class="cursor-pointer" id="form0" 
                 onclick="openCloseForm('form0')">＋</span>
             <div class="refine-check hidden">
-                <p>{{ field }}</p>
-            </div>
+                {% for item in field %}
+                <p>{{ item.tag }}<label>{{ item.choice_label }}</label></p>
+                {% endfor %}
+            </div>                    
         {% endfor %}
         <p></p>
         
