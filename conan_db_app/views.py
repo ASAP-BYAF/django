@@ -15,17 +15,51 @@ class IndexView(TemplateView):
     def get(self, request):
         return render(request, 'conan_db_app/index.html')
 
+
 class CharaListView(ListView):
     model = Character
+
 
 class AffiliationListView(ListView):
     model = Affiliation
 
+
 class AffiliationDetailView(DetailView):
     model = Affiliation
 
-class WisewordListView(ListView):
+
+class WisewordListView(ListView, FormMixin):
     model = Wiseword
+    paginate_by = 3
+    form_class = CharaForm
+
+    def post(self, request, page = None):
+        return self.get(request)
+
+    def get_queryset(self):
+        # 各絞り込みに当てはまる事件の番号の集合を記録
+        refined_wiseword_number_list = []
+
+        # 名言をキャラクターについて or 検索
+        if chara_list := self.request.POST.getlist('character'):       
+            tmp = set()
+            for i_wiseword in Wiseword.objects.all():
+                if any([ j_chara == i_wiseword.character.name for j_chara in chara_list]):
+                    tmp.add(i_wiseword.id)
+            refined_wiseword_number_list.append(tmp)
+
+        if refined_wiseword_number_list:
+            for i, i_refined_set in enumerate(refined_wiseword_number_list, 1):
+                if i == 1:
+                    and_refined_set = i_refined_set
+                else:
+                    and_refined_set &= i_refined_set
+            queryset = Wiseword.objects.filter(id__in=and_refined_set)
+            
+        else :
+            queryset = Wiseword.objects.all()
+
+        return queryset
 
 class CaseListView(ListView, FormMixin):
     model = Case
@@ -71,7 +105,6 @@ class CaseListView(ListView, FormMixin):
         if chara_list := self.request.POST.getlist('character'):       
             tmp = set()
             for i_case in Case.objects.all():
-                # chara_list_i_case = { i_chapter.character_set.name for i_chapter in i_case.chapter_set.all()}
                 chara_list_i_case = { i_chara.name for i_chapter in i_case.chapter_set.all()\
                      for i_chara in i_chapter.character_set.all()}
                 if all([ j_chara in chara_list_i_case for j_chara in chara_list]):
@@ -121,8 +154,10 @@ class CaseListView(ListView, FormMixin):
     def post(self, request, page = None):
         return self.get(request)
 
+
 class CaseDetailView(DetailView):
     model = Case
+
 
 class QuestionCreateView(CreateView):
     form_class = QuestionForm
@@ -138,6 +173,7 @@ class QuestionCreateView(CreateView):
         ''' バリデーションに失敗した時 '''
         messages.warning(self.request, "保存できませんでした")
         return super().form_invalid(form)
+
 
 class QuestionListView(ListView, FormMixin):
     model = Question
@@ -167,7 +203,6 @@ class QuestionListView(ListView, FormMixin):
     def post(self, request):
         # form = self.form_class(request.POST)
         return self.get(request)
-
 
 
 def chara_detail_func(request, pk, page=1):
@@ -200,6 +235,7 @@ def chara_detail_func(request, pk, page=1):
     'form':form
     }
     return render(request, 'conan_db_app/character_detail.html', context)
+
 
 def queryset_to_page(queryset, page_num, page):
     page_list = Paginator(queryset, page_num)

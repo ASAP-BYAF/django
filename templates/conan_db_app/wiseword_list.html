@@ -21,5 +21,44 @@
         </tr>
     {% endfor %}
     </table>
+    <form action="{% url 'conan_db_app:wiseword_list' %}" method="post" name="refine_form">
+        {% csrf_token %}
+        {% for field in form %}
+            <label>
+                {{ field.label }}
+            </label>
+            <span class="cursor-pointer" id="form0" 
+                onclick="openCloseForm('form0')">＋</span>
+            <div class="refine-check hidden">
+                <p>{{ field }}</p>
+            </div>
+        {% endfor %}
+        <p></p>
+        
+        <button class="btn">更新</button>
+    </form>
+
+    <ul class="[&>li]:text-center [&>li]:text-xl [&>li]:py-2">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a href="javascript:plusPageAndSendForm({{1}})">
+                &laquo; first</a>
+            </li>
+            <li class="page-item">
+                <a href="javascript:plusPageAndSendForm({{page_obj.previous_page_number}})">
+                &laquo; prev</a>
+            </li>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a href="javascript:plusPageAndSendForm({{page_obj.next_page_number}})">
+                next &raquo;</a>
+            </li>
+            <li class="page-item">
+                <a href="javascript:plusPageAndSendForm({{page_obj.paginator.num_pages}})">
+                last &raquo;</a>
+            </li>
+        {% endif %}
+    </ul>    
 </main>
 {% endblock %}
