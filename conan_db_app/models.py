@@ -99,7 +99,7 @@ class Character(models.Model):
     ### 他のテーブルとの関連
     chapter = models.ManyToManyField(Chapter)
     event_related_to = models.ManyToManyField(Event, blank=True)
-    belong_to = models.ManyToManyField(Affiliation)
+    belong_to = models.ManyToManyField(Affiliation, blank=True)
     profession = models.ManyToManyField(Profession, blank=True)
 
     ### object 自体の表示方法を指定
