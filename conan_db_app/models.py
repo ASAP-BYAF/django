@@ -49,7 +49,8 @@ class Chapter(models.Model):
 
     ### object 自体の表示方法を指定
     def __str__(self):
-        return f'Volume.{self.volume.number} - File.{self.number_in_volume} : {self.name}'
+        return f'Volume.{self.volume.number} - File.{self.number_in_volume}\
+            ({self.number_in_all}) : {self.name}'
 
     ### 並び順を指定
     class Meta:
