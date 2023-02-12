@@ -237,7 +237,7 @@ def chara_detail_func(request, pk, page=1):
         form = WithEventForm(request.POST)
 
         if request.POST.get('with_event'):
-            chapter_list = character.chapter.filter(event = True)
+            chapter_list = character.chapter.filter(event__in = event).distinct()
         else :
             chapter_list = character.chapter.all()
 
@@ -247,8 +247,6 @@ def chara_detail_func(request, pk, page=1):
         form = WithEventForm()
 
         chapter_list = character.chapter.all()
-
-    chapter_list = chapter_list.order_by('number_in_all')
 
     context = {
     'character' : character, # html 側で for で回すので、イテラブルとして渡す。
