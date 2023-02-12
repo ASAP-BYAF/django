@@ -8,11 +8,11 @@
     <h1>真実はいつも一つ</h1>
     <p>{{object.name}}</p>
     <table>
-    {% for i_character in object.character_set.all %}
         <tr>
             <th>所属者</th>
             <th>役割</th>
         </tr>
+        {% for i_character in object.character_set.all %}
         <tr>
             <td><a href="{% url 'conan_db_app:detail' pk=i_character.id page=1 %}">{{i_character.name}}</a></td>
             <td>
